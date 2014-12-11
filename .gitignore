@@ -1,0 +1,14 @@
+### Eclipse
+#.metadata/
+#.settings/
+#.classpath
+#.project
+
+### NetBeans
+nb-configuration.xml
+nbbuild.xml
+nbdist/
+nbproject/
+
+### Maven
+target/
