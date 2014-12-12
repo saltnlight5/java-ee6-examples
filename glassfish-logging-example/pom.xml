@@ -106,5 +106,20 @@
                 </dependency>
             </dependencies>
         </profile>
+		
+		<profile>
+            <id>glassfish-mysql</id>
+            <!--
+            Setup server globally to support MySQL database.
+            -->
+            <dependencies>                
+                <dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>5.1.34</version>
+				</dependency>
+            </dependencies>
+        </profile>
+		
     </profiles>
 </project>
