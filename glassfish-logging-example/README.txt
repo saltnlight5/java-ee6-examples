@@ -17,7 +17,9 @@ the JDK logging by package name.
 
 1. cd glassfish-logging-example
 2. mvn package
-3. cp target/glassfish-logging-example-1.0-SNAPSHOT.war $GF/domains/domain1/applications
+3. cp target/glassfish-logging-example-1.0-SNAPSHOT.war $GF/domains/domain1/autodeploy
+
+Now inspect your log file at $GF/domains/domain1/logs/server.log
 
 = Gettin started with Glassfish server
 
