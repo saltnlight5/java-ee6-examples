@@ -7,6 +7,11 @@ import javax.servlet.annotation.WebListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * An app listener that uses SLF4J logger.
+ * 
+ * @author zedeng
+ */
 @WebListener
 public class WebAppStartup implements ServletContextListener {
 
