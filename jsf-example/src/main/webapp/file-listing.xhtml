@@ -1,0 +1,12 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:body>
+        <h1>Directory Listing: <pre>#{fileListing.dir.absolutePath}</pre></h1>
+        <ul>
+            <ui:repeat value="#{fileListing.files}" var="file">
+                <li>#{file.path}</li>
+            </ui:repeat>
+        </ul>
+    </h:body>
+</html>

@@ -1,0 +1,27 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:body>
+        <h2>Form Process</h2>
+        <h:form>
+            <h3>Simple Inputs</h3>
+            <h:inputHidden value="#{formInputs.token}"/>
+
+            <p>
+                <h:outputLabel value="Name"/>
+                <h:inputText value="#{formInputs.name}"/>
+            </p>
+
+            <p>
+                <h:outputLabel value="Password"/>
+                <h:inputSecret value="#{formInputs.password}"/>
+            </p>
+
+            <p>
+                <h:outputLabel value="Comment"/>
+                <h:inputTextarea value="#{formInputs.comment}"/>
+            </p>
+
+            <h:commandButton value="Process" action="#{formInputs.processForm}"/>
+        </h:form>
+    </h:body>
+</html>

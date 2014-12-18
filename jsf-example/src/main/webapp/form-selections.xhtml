@@ -1,0 +1,27 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <h2>Form Process</h2>
+        <h:form>
+            <h3>Selections</h3>
+            <p>
+                <h:outputLabel value="Centry"/>
+                <h:selectOneListbox value="#{formSelections.centrySelection}" size="1" >
+                    <f:selectItem itemValue="1800" itemLabel="18th Centry"/>
+                    <f:selectItem itemValue="1900" itemLabel="19th Centry"/>
+                    <f:selectItem itemValue="2000" itemLabel="20th Centry"/>
+                    <f:selectItem itemValue="2100" itemLabel="21th Centry"/>
+                </h:selectOneListbox>
+            </p>
+            <p>
+                <h:outputLabel value="Script Engine"/>
+                <h:selectOneListbox value="#{formSelections.scriptEngineNameSelection}" size="1">
+                    <f:selectItems value="#{formSelections.scriptEngineNames}"/>
+                </h:selectOneListbox>
+            </p>
+
+            <h:commandButton value="Process" action="#{formSelections.processForm}"/>
+        </h:form>
+    </h:body>
+</html>
