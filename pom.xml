@@ -10,6 +10,9 @@
 	
 	<modules>
 		<module>common-service</module>
+		<module>servlet3-example</module>
+		<module>jsf-example</module>
+		<module>jpa-example</module>
 	</modules>
 
     <properties>
