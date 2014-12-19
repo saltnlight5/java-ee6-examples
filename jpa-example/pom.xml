@@ -4,40 +4,22 @@
 
     <modelVersion>4.0.0</modelVersion>
 	
-	<parent>
-		<groupId>zemian</groupId>
-		<artifactId>java-ee6-examples-parent-pom</artifactId>
-		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+    <parent>
+        <groupId>zemian</groupId>
+        <artifactId>java-ee6-examples-parent-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
     <groupId>zemian</groupId>
     <artifactId>jpa-example</artifactId>
-    <packaging>war</packaging>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <packaging>jar</packaging>
     
-    <profiles>
-        <profile>
-            <id>groovy</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.codehaus.groovy</groupId>
-                    <artifactId>groovy-all</artifactId>
-                    <version>2.3.8</version>
-                </dependency>
-            </dependencies>    
-        </profile>
-    </profiles>
+    <dependencies>
+        <dependency>
+            <groupId>zemian</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

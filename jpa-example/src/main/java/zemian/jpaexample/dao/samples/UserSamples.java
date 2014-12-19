@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import zemian.jpaexample.dao.UserDao;
 import zemian.jpaexample.data.User;
-import zemian.jpaexample.web.rest.ScriptResource;
 
 /**
  *
