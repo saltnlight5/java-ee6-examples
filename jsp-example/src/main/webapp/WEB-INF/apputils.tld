@@ -1,0 +1,11 @@
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+    <tlib-version>2.0</tlib-version>    
+    <uri>AppUtils</uri>
+    <function>
+        <name>objUtilsToString</name>
+        <function-class>zemian.jspexample.util.ObjectUtils</function-class>
+        <function-signature>java.lang.String toString(java.lang.Object)</function-signature>
+    </function>
+</taglib>
