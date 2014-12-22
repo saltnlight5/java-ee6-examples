@@ -45,7 +45,8 @@ Quick JSP and JSTL ref: http://stackoverflow.com/tags/jstl/info
             sessionScope: Maps session-scoped variable names to their values
             applicationScope: Maps application-scoped variable names to their values
 
-
+http://docs.oracle.com/javaee/5/tutorial/doc/bnahq.html#bnaif
+http://docs.oracle.com/javaee/5/tutorial/doc/bnahq.html#bnaif
 
 == JSP/Servlet Versions
 
