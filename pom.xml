@@ -10,9 +10,10 @@
 	
     <modules>
         <module>common-service</module>
+        <module>jsp-example</module>
+        <module>servlet3-example</module>
         <module>jpa-example</module>
         <module>rest-example</module>
-        <module>servlet3-example</module>
         <module>jsf-example</module>
     </modules>
 
@@ -117,21 +118,7 @@
                 -->
             </dependencies>
         </profile>
-        
-        <profile>
-            <id>glassfish-web</id>
-            <!--
-            Setup server globally to support JSTL.
-            -->
-            <dependencies>                
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>jstl</artifactId>
-                    <version>1.2</version>
-                </dependency>
-            </dependencies>
-        </profile>
-		
+        		
         <profile>
             <id>glassfish-mysql</id>
             <!--
