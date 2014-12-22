@@ -1,3 +1,5 @@
+= About java-ee6-examples
+
 Explore Java EE 6 by examples
 	You will find Maven based projects that explore some of major EE 6 
 	components or specs	with working code examples. Most of the examples 
