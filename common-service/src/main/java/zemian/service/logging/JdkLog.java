@@ -1,3 +1,7 @@
+/*
+ *  Zemian Deng 2014
+ */
+
 package zemian.service.logging;
 
 import java.util.logging.Level;
