@@ -83,11 +83,11 @@
     
     <profiles>
         <profile>
-            <id>glassfish-logging</id>
-            <!--
-            Setup server globally to support SLF4J.
-            -->
-            <dependencies>		
+            <id>server-common-lib</id>
+            <dependencies>
+                <!--
+                Logger
+                -->
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>
@@ -99,32 +99,9 @@
                     <version>1.7.7</version>
                 </dependency>
                 
-                <!-- Log4j Implementation
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                    <version>1.7.7</version>
-                    <scope>runtime</scope>
-                </dependency>
-                -->
-		        
-                <!-- JDK bridge logger.
-                <dependency>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>jul-to-slf4j</artifactId>
-                    <version>1.7.7</version>
-                    <scope>runtime</scope>
-                </dependency>
-                -->
-            </dependencies>
-        </profile>
-        		
-        <profile>
-            <id>glassfish-mysql</id>
-            <!--
-            Setup server globally to support MySQL database.
-            -->
-            <dependencies>                
+                <!--
+                MySQL database.
+                -->              
                 <dependency>
                     <groupId>mysql</groupId>
                     <artifactId>mysql-connector-java</artifactId>
@@ -132,6 +109,16 @@
                 </dependency>
             </dependencies>
         </profile>
-		
+                
+        <profile>
+            <id>server-extra-lib</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.codehaus.groovy</groupId>
+                    <artifactId>groovy-all</artifactId>
+                    <version>2.3.8</version>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 </project>

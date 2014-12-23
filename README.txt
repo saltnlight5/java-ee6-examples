@@ -24,6 +24,6 @@ to deploy this way so the application should be very thin and should not
 contain repeated common external libraries.
 
 If the server you are using does not include SLF4J (or need special ways to 
-configure it) then please read the server specific documentaion on how to add 
+configure it) then please read the server specific documentation on how to add 
 common libraries for all applications to use. For example with GlassFish 
 server, see "glassfish-logging-example/README.txt" on how to do this.

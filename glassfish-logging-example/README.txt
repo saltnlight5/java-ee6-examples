@@ -57,7 +57,7 @@ You may download jars from their project site, or you may use the Maven and fetc
 the custom profiles defined in this project pom.xml like this:
 
 	1. cd glassfish-logging-example
-	2. mvn dependency:copy-dependencies -P glassfish-logging
+	2. mvn dependency:copy-dependencies -P server-common-lib
 
 Now you will find the jars in target/dependency folder.	Just copy what you need.
 
