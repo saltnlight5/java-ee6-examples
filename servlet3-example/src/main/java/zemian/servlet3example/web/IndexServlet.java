@@ -1,20 +1,26 @@
 package zemian.servlet3example.web;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/index")
-public class IndexServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
+public class IndexServlet extends HtmlWriterServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+    protected void writeContent(HtmlWriter html) {
+        html.header()
+            .h(1, "Welcome to Servlet 3 Example")
+            .p("Let's explore Java Servlet 3.x Features.")
+            .ul(tableOfContentList())
+            .footer();
     }
+
+    private List<String> tableOfContentList() {
+        List<String> list = new ArrayList<>();
+        list.add(link("Index", "/index"));
+        list.add(link("View JSP Dispatcher", "/view-jsp"));
+        return list;
+    }
+
 }
