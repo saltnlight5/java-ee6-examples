@@ -2,7 +2,7 @@
  *  Zemian Deng 2014
  */
 
-package zemian.jspexample.util;
+package zemian.util;
 
 /**
  *

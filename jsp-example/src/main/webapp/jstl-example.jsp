@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib uri="AppUtils" prefix="apptutils"%>
+<%@ taglib uri="utils" prefix="utils"%>
 <!DOCTYPE html>
 <html>
     <body>
@@ -19,7 +19,7 @@
                     so we use a util to safely convert to a string output. 
                     Look for "_BAD_TO_STRING" suffix in output to see if there is any.
                     --%>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:objToString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
