@@ -20,7 +20,7 @@ public class JdkLog implements Log {
     private Logger jdkLogger;
 
     public JdkLog(Class<?> loggerClass) {
-        LOGGER.fine("Creating new LogService for " + loggerClass);
+        //LOGGER.fine("Creating new LogService for " + loggerClass);
         jdkLogger = Logger.getLogger(loggerClass.getName());
     }
 
