@@ -3,23 +3,24 @@
  */
 package zemian.mvcexample.web.controller;
 
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
-import zemian.mvcexample.web.MvcMainServlet;
 
 /**
- *
+ * A class to encapsulate all the data needed to process a request by a Controller.
+ * 
  * @author zedeng
  */
 public class WebRequest {
     private HttpServletRequest httpServletRequest;
-    private MvcMainServlet mvcMainServlet;
+    private Servlet mainServlet;
 
-    public void setMvcMainServlet(MvcMainServlet mvcMainServlet) {
-        this.mvcMainServlet = mvcMainServlet;
+    public void setMainServlet(Servlet mainServlet) {
+        this.mainServlet = mainServlet;
     }
 
-    public MvcMainServlet getMvcMainServlet() {
-        return mvcMainServlet;
+    public Servlet getMainServlet() {
+        return mainServlet;
     }
     
     public void setHttpServletRequest(HttpServletRequest httpServletRequest) {

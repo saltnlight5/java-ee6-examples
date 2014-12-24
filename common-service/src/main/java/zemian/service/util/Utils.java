@@ -10,10 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * A utility class that provide general programming helpers.
+ * 
  * @author zedeng
  */
 public class Utils {
+    // We do not intend to instanciate this class.
+    private Utils() {
+    }
+    
     /** A safe and string converter that guarantee to return a string regardless
      of input. */
     public static String toString(Object object) {

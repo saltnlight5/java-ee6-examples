@@ -2,7 +2,6 @@ package zemian.mvcexample.web;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import zemian.mvcexample.service.Application;
 import zemian.mvcexample.web.controller.Controller;
-import zemian.mvcexample.web.controller.EmptyController;
 import zemian.mvcexample.web.controller.HelloController;
 import zemian.mvcexample.web.controller.IndexController;
 import zemian.mvcexample.web.controller.SysPropsController;
@@ -21,25 +20,23 @@ import zemian.mvcexample.web.controller.WebRequest;
 import zemian.service.util.Tuple;
 import zemian.service.util.Utils;
 
+/**
+ * A main controller dispatcher that parse http request and delegate to user
+ * controller handlers. User should register their controllers into the Application
+ * space.
+ * 
+ * @author zedeng
+ */
 @WebServlet("/main/*")
 public class MvcMainServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final Logger LOGGER = LoggerFactory.getLogger(MvcMainServlet.class);
     private static final String TEMPLATE_PATH = "/jsp";
-    private Map<String, Controller> controllers;
-
-    public Map<String, Controller> getControllers() {
-        return controllers;
-    }
     
     @Override
     public void init() throws ServletException {
-        // TODO: We need to make these controllers configurable outside of this controller.
-        controllers = new HashMap<>();
-        controllers.put("index", new IndexController());
-        controllers.put("hello", new HelloController());
-        controllers.put("sys-props", new SysPropsController());
+        registerControllers();
     }
     
     @Override
@@ -48,13 +45,14 @@ public class MvcMainServlet extends HttpServlet {
         String controllerPath = paths.getA();
         String viewPath = paths.getB();
         LOGGER.debug("Processing controllerPath={}, viewPath={}", controllerPath, viewPath);
+        Map<String, Controller> controllers = Application.getInstance().getControllers();
         Controller controller = controllers.get(controllerPath);
         if (controller == null)
             throw new RuntimeException("No controller mapped for " + controllerPath);
         
         WebRequest webRequest = new WebRequest();
         webRequest.setHttpServletRequest(req);
-        webRequest.setMvcMainServlet(this);
+        webRequest.setMainServlet(this);
         
         Object model = controller.handle(webRequest);
         addModelToRequestAttributes(model, req);
@@ -66,7 +64,7 @@ public class MvcMainServlet extends HttpServlet {
         //                 /mvc-example/mycontroller
 
         String uri = req.getRequestURI();
-        LOGGER.debug("Parsing uri={}", uri);
+        LOGGER.trace("Parsing uri={}", uri);
         if (uri.endsWith("/")) 
             uri = uri.substring(0, uri.length() - 1);
         String[] paths = uri.split("/"); // We will have min of two elements
@@ -95,5 +93,13 @@ public class MvcMainServlet extends HttpServlet {
         } else {
             req.setAttribute("model", model);
         }
+    }
+
+    protected void registerControllers() {
+        // TODO: We need to make these controllers configurable outside of this controller.
+        Map<String, Controller> controllers = Application.getInstance().getControllers();
+        controllers.put("index", new IndexController());
+        controllers.put("hello", new HelloController());
+        controllers.put("sys-props", new SysPropsController());
     }
 }

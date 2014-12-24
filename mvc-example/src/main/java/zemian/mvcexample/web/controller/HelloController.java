@@ -8,7 +8,9 @@ import java.util.Date;
 import zemian.service.util.Utils;
 
 /**
- *
+ * Just a test controller that return "message" and "serverTime" as model map. 
+ * This is mainly for testing purpose.
+ * 
  * @author zedeng
  */
 public class HelloController implements Controller {

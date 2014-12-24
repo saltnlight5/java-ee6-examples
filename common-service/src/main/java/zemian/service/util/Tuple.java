@@ -5,7 +5,8 @@
 package zemian.service.util;
 
 /**
- *
+ * A tuple of two elements.
+ * 
  * @author zedeng
  */
 public class Tuple<A, B> {
