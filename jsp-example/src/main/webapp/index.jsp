@@ -7,7 +7,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/index.jsp">Index</a></li>
             <li><a href="${pageContext.request.contextPath}/jsp-vars.jsp">JSP Implicit Variables</a></li>
-            <li><a href="${pageContext.request.contextPath}/jstl-examle.jsp">JSTL Example</a></li>
+            <li><a href="${pageContext.request.contextPath}/jstl-example.jsp">JSTL Example</a></li>
             <li><a href="${pageContext.request.contextPath}/jsp-redirect.jsp">Redirect Back to Index</a></li>
         </ul>
         <p>Page served on <%= new java.util.Date()%></p>

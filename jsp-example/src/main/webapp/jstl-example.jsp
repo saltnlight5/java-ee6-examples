@@ -19,7 +19,7 @@
                     so we use a util to safely convert to a string output. 
                     Look for "_BAD_TO_STRING" suffix in output to see if there is any.
                     --%>
-                    <c:out value="${utils:objToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>

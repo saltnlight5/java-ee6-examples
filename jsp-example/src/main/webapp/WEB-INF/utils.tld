@@ -3,8 +3,8 @@
   <uri>utils</uri>
   <tlib-version>1.0</tlib-version>
   <function>
-    <name>objToString</name>
-    <function-class>zemian.util.ObjectUtils</function-class>
+    <name>toString</name>
+    <function-class>zemian.service.util.Utils</function-class>
     <function-signature>java.lang.String toString(java.lang.Object)</function-signature>
   </function>
 </taglib>

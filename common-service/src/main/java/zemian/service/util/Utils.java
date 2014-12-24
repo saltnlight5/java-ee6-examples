@@ -2,13 +2,13 @@
  *  Zemian Deng 2014
  */
 
-package zemian.util;
+package zemian.service.util;
 
 /**
  *
  * @author zedeng
  */
-public class ObjectUtils {
+public class Utils {
     /** A safe and string converter that guarantee to return a string regardless
      of input. */
     public static String toString(Object object) {
