@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <h1>Hello</h1>
-        <p>Hello, this is a JSP view tempalte dispatched by a Servlet controller.</p>
+        <h1>Server Message</h1>
+        <p>${message}</p>
+        <p>Page served on ${serverTime}</p>
     </body>
 </html>
