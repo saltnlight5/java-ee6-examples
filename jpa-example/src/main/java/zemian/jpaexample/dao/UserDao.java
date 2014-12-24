@@ -2,13 +2,11 @@ package zemian.jpaexample.dao;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import zemian.jpaexample.data.User;
+import zemian.service.logging.Logger;
 
 public class UserDao extends JpaDao<User> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
+    private static final Logger LOGGER = new Logger(UserDao.class);
 
     public UserDao() {
         super(User.class);

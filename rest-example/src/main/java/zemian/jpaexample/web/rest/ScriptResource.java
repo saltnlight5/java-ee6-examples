@@ -18,8 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 /**
  * Give instant access to your internal application with dynamic scripting.
@@ -47,7 +46,7 @@ import org.slf4j.LoggerFactory;
  */
 @Path("script")
 public class ScriptResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScriptResource.class);
+    private static final Logger LOGGER = new Logger(ScriptResource.class);
    
     @Context
     private ServletContext servletContext;

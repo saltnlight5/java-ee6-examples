@@ -2,8 +2,7 @@ package zemian.jsfexample.web.controller;
 
 import java.util.UUID;
 import javax.faces.bean.ManagedBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 /**
  * Demonstrate Text Inputs in Form processing.
@@ -15,8 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 @ManagedBean
 public class FormInputs {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormInputs.class);
+    private static final Logger LOGGER = new Logger(FormInputs.class);
     private String token = UUID.randomUUID().toString();
 
     private String name;

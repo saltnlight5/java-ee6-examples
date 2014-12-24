@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * A config service that reads from Java System Properties.
@@ -17,8 +15,6 @@ import org.slf4j.LoggerFactory;
  * @author zedeng
  */
 public class PropsConfig implements Config {
-    private static Logger LOGGER = LoggerFactory.getLogger(PropsConfig.class);
-            
     private Config parent;
     private Properties props;
     

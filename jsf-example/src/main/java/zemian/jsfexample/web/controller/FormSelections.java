@@ -6,8 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 /**
  * Demonstrate Selection Inputs in Form processing.
@@ -16,8 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 @ManagedBean
 public class FormSelections {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormSelections.class);
+    private static final Logger LOGGER = new Logger(FormSelections.class);
 
     @PostConstruct
     public void init() {
@@ -58,7 +56,7 @@ public class FormSelections {
 
     private void initCentrySelectionDefault() {
         centrySelection = "2100";
-        LOGGER.debug("Default centrySelection={}", centrySelection);
+        LOGGER.debug("Default centrySelection=%s", centrySelection);
     }
 
     private void initScriptEngineNames() {
@@ -68,7 +66,7 @@ public class FormSelections {
             String label = fac.getEngineName() + fac.getExtensions();
             scriptEngineNames.put(label, fac.getLanguageName());
         }
-        LOGGER.debug("Found {} engine names.", scriptEngineNames.size());
+        LOGGER.debug("Found %s engine names.", scriptEngineNames.size());
     }
 
     private void initScriptEngineNameSelectionDefault() {
@@ -78,7 +76,7 @@ public class FormSelections {
         } else {
             scriptEngineNameSelection = "ECMAScript"; // JavaScript.
         }
-        LOGGER.debug("Default scriptEngineNameSelection={}", scriptEngineNameSelection);
+        LOGGER.debug("Default scriptEngineNameSelection=%s", scriptEngineNameSelection);
     }
 
     ////////////////////////////////////////////////////////////////////////////

@@ -10,15 +10,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 /**
  *
  * @author zedeng
  */
 public class JndiUtils {
-    private static Logger LOGGER = LoggerFactory.getLogger(JndiUtils.class);
+    private static final Logger LOGGER = new Logger(JndiUtils.class);
     
     public static <T> T lookup(String name) {
         T result = null;

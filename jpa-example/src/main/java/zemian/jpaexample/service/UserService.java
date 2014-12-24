@@ -7,17 +7,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import zemian.jpaexample.dao.UserDao;
 import zemian.jpaexample.data.User;
+import zemian.service.logging.Logger;
 import zemian.service.security.Encrypt;
 
 @Stateless
 public class UserService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
-
+    private static final Logger LOGGER = new Logger(UserService.class);
+    
     @Inject
     private UserDao userDao;
     
@@ -41,7 +39,7 @@ public class UserService {
 
     public List<User> findMostActiveUsers() {
         LOGGER.debug("Finding all active users.");
-        LOGGER.info("Using userDao={}", userDao);
+        LOGGER.info("Using userDao=%s", userDao);
         return userDao.findMostActiveUsers();
     }
 }

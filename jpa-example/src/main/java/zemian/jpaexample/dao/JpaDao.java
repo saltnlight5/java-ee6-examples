@@ -2,13 +2,11 @@ package zemian.jpaexample.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 public class JpaDao<T> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JpaDao.class);
-
+    private static final Logger LOGGER = new Logger(JpaDao.class);
+    
     @PersistenceContext
     protected EntityManager entityManager;
 
@@ -34,22 +32,22 @@ public class JpaDao<T> {
     }
 
     public void save(T entity) {
-        LOGGER.debug("Saving entity={}", entity);
+        LOGGER.debug("Saving entity=%s", entity);
         entityManager.persist(entity);
     }
 
     public T update(T entity) {
-        LOGGER.debug("Updating entity={}", entity);
+        LOGGER.debug("Updating entity=%s", entity);
         return entityManager.merge(entity);
     }
 
     public T find(Object primaryKey) {
-        LOGGER.debug("Finding entityClass={}, primaryKey={}", entityClass, primaryKey);
+        LOGGER.debug("Finding entityClass=%s, primaryKey=%s", entityClass, primaryKey);
         return entityManager.find(entityClass, primaryKey);
     }
 
     public void delete(Object primaryKey) {
-        LOGGER.debug("Deleting entity primaryKey={}", primaryKey);
+        LOGGER.debug("Deleting entity primaryKey=%s", primaryKey);
         T ref = entityManager.getReference(entityClass, primaryKey);
         entityManager.remove(ref);
     }

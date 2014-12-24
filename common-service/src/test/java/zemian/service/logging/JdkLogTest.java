@@ -1,10 +1,7 @@
 package zemian.service.logging;
 
-import zemian.service.logging.Log;
-import zemian.service.logging.LogFactory;
 import static zemian.service.logging.Message.msg;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * Note that depending on your JDK logging.properties configuration, you might not

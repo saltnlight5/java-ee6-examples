@@ -12,15 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import zemian.jpaexample.service.UserService;
+import zemian.service.logging.Logger;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserServlet.class);
+    private static final Logger LOGGER = new Logger(UserServlet.class);
 
     private static final long serialVersionUID = 1L;
 

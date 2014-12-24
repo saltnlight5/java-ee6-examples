@@ -6,20 +6,18 @@
 package zemian.jpaexample.web.rest;
 
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import zemian.jpaexample.dao.samples.UserSamples;
 import zemian.jpaexample.data.User;
+import zemian.service.logging.Logger;
 
 @Path("samples")
 public class SamplesResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ScriptResource.class);
+    private static final Logger LOGGER = new Logger(SamplesResource.class);
    
     @Inject
     private UserSamples userSamples;
@@ -28,7 +26,7 @@ public class SamplesResource {
     @Path("random-name-users")
     public List<User> createRandomNameUsers(@QueryParam("numOfUsers") @DefaultValue("10") int numOfUsers) {
         List<User> users = userSamples.createRandomNameUsers("tester", numOfUsers);
-        LOGGER.info("Generated {} tester users.", users.size());
+        LOGGER.info("Generated %d tester users.", users.size());
         return users;
     }
 }

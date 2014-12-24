@@ -11,10 +11,9 @@ import java.util.Random;
 import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import zemian.jpaexample.dao.UserDao;
 import zemian.jpaexample.data.User;
+import zemian.service.logging.Logger;
 
 /**
  *
@@ -22,7 +21,7 @@ import zemian.jpaexample.data.User;
  */
 @Stateless
 public class UserSamples {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserSamples.class);
+    private static final Logger LOGGER = new Logger(UserSamples.class);
     private static final String NUMS = "0123456789";
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LETTERS_NUMS = LETTERS + NUMS;
@@ -46,7 +45,7 @@ public class UserSamples {
     public List<User> createRandomNameUsers(String baseUsername, int numOfUsers) {
         List<User> result = new ArrayList<>();
         String batchId = randLettersNums(4).toLowerCase();
-        LOGGER.debug("Generating users with batchId={}", batchId);
+        LOGGER.debug("Generating users with batchId=%s", batchId);
         for (int i = 0; i < numOfUsers; i++) {
             User user = new User();
             user.setUsername(batchId + "_" + baseUsername + "_" + i);

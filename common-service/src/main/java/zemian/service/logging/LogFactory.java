@@ -11,9 +11,19 @@ package zemian.service.logging;
  * <p>Example:</p>
  * <pre>
  class MyService {
-   Log log = LogFactory.createLog(MyService.class);
+   static Log LOG = LogFactory.createLog(MyService.class);
    public void run() {
-     log.info(Message.msg("%s service is running now.", this));
+     LOG.info(Message.msg("%s service is running now.", this));
+   }
+ }
+ </pre>
+ * 
+ * Or you can use the Logger helper class to have less imports.
+ * <pre>
+ class MyService2 {
+   static Logger LOGGER = new Logger(MyService2.class);
+   public void run() {
+     LOGGER.info("%s service is running now.", this));
    }
  }
  </pre>

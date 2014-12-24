@@ -9,14 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import zemian.mvcexample.service.Application;
 import zemian.mvcexample.web.controller.Controller;
 import zemian.mvcexample.web.controller.HelloController;
 import zemian.mvcexample.web.controller.IndexController;
 import zemian.mvcexample.web.controller.SysPropsController;
 import zemian.mvcexample.web.controller.WebRequest;
+import zemian.service.logging.Logger;
 import zemian.service.util.Tuple;
 import zemian.service.util.Utils;
 
@@ -29,9 +28,8 @@ import zemian.service.util.Utils;
  */
 @WebServlet("/main/*")
 public class MvcMainServlet extends HttpServlet {
-
+    private static final Logger LOGGER = new Logger(MvcMainServlet.class);
     private static final long serialVersionUID = 1L;
-    private static final Logger LOGGER = LoggerFactory.getLogger(MvcMainServlet.class);
     private static final String TEMPLATE_PATH = "/jsp";
     
     @Override
@@ -44,7 +42,7 @@ public class MvcMainServlet extends HttpServlet {
         Tuple<String, String> paths = parsePaths(req);
         String controllerPath = paths.getA();
         String viewPath = paths.getB();
-        LOGGER.debug("Processing controllerPath={}, viewPath={}", controllerPath, viewPath);
+        LOGGER.debug("Processing controllerPath=%s, viewPath=%s", controllerPath, viewPath);
         Map<String, Controller> controllers = Application.getInstance().getControllers();
         Controller controller = controllers.get(controllerPath);
         if (controller == null)
@@ -64,7 +62,7 @@ public class MvcMainServlet extends HttpServlet {
         //                 /mvc-example/mycontroller
 
         String uri = req.getRequestURI();
-        LOGGER.trace("Parsing uri={}", uri);
+        LOGGER.trace("Parsing uri=%s", uri);
         if (uri.endsWith("/")) 
             uri = uri.substring(0, uri.length() - 1);
         String[] paths = uri.split("/"); // We will have min of two elements

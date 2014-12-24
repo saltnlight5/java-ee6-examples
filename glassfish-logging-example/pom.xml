@@ -25,6 +25,23 @@
         </plugins>
     </build>
      
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.7</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>zemian</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
+    </dependencies>
     <profiles>
         <profile>
             <id>logger-extra</id>

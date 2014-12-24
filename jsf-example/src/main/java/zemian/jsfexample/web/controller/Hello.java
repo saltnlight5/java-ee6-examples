@@ -2,8 +2,7 @@ package zemian.jsfexample.web.controller;
 
 
 import javax.faces.bean.ManagedBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import zemian.service.logging.Logger;
 
 /**
  * This managed bean will create new instance per HTTP request.
@@ -12,8 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 @ManagedBean
 public class Hello {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Hello.class);
-
+    private static final Logger LOGGER = new Logger(Hello.class);
     public Hello() {
         LOGGER.info("Hello component created: " + this);
     }
