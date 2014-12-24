@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import zemian.service.util.Utils;
 
 /**
@@ -15,10 +16,21 @@ import zemian.service.util.Utils;
  * @author zedeng
  */
 public class HtmlWriter {
+    private HttpServletRequest req;
     private PrintWriter writer;
 
-    public HtmlWriter(PrintWriter writer) {
+    public HtmlWriter(HttpServletRequest req, PrintWriter writer) {
+        this.req = req;
         this.writer = writer;
+    }
+    
+    public HttpServletRequest getReq() {
+        return req;
+    }
+
+    public HtmlWriter out(String text) {
+        writer.println(text);
+        return this;
     }
 
     public HtmlWriter header() {
@@ -37,7 +49,7 @@ public class HtmlWriter {
     }
 
     public HtmlWriter p(String text) {
-        writer.println("<p>" + "</p>");
+        writer.println("<p>" + text + "</p>");
         return this;
     }
 
@@ -81,6 +93,7 @@ public class HtmlWriter {
     }
     
     public String link(String label, String url) {
-        return "<a href=\"" + url + "\">" + label + "</a>";
+        String contextPath = req.getContextPath();
+        return "<a href=\"" + contextPath + url + "\">" + label + "</a>";
     }
 }
