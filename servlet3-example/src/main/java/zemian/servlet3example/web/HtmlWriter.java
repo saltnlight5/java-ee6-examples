@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import zemian.util.ObjectUtils;
+import zemian.service.util.Utils;
 
 /**
  *
@@ -62,7 +62,7 @@ public class HtmlWriter {
     public HtmlWriter table(Map<?, ?> map) {
         writer.println("<table>");
         for (Map.Entry<?, ?> entry : map.entrySet()) {
-            String key = ObjectUtils.toString(entry.getKey());
+            String key = Utils.toString(entry.getKey());
             Object value = entry.getValue();            
             writer.println("<tr><td>" + key + "</td>");
             writer.println("<td>");
@@ -71,7 +71,7 @@ public class HtmlWriter {
             } else if (value instanceof Map) {
                 table((Map) value);
             } else {
-                writer.println(ObjectUtils.toString(value));
+                writer.println(Utils.toString(value));
             }
             writer.println("</td>");
             writer.println("</tr>");
