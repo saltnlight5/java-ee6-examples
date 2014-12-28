@@ -10,11 +10,16 @@ import javax.servlet.http.HttpSession;
 public abstract class HtmlWriterServlet extends HttpServlet {
 
     protected static final long serialVersionUID = 1L;
-       
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HtmlWriter writer = new HtmlWriter(req, resp.getWriter());
-        writeContent(writer);
+    
+    protected HtmlWriter createHtmlWriter(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            HtmlWriter writer = new HtmlWriter();
+            writer.setWriter(resp.getWriter());
+            writer.setContextPath(req.getContextPath());
+            return writer;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to get response Writer.", e);
+        }
     }
     
     protected SessionData getOptionalSessionData(HttpServletRequest req) {
@@ -24,6 +29,4 @@ public abstract class HtmlWriterServlet extends HttpServlet {
             result = (SessionData)session.getAttribute(SessionData.SESSION_DATA_KEY);
         return result;
     }
-    
-    abstract protected void writeContent(HtmlWriter html);    
 }

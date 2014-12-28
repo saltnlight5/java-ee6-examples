@@ -9,31 +9,23 @@ import javax.servlet.http.HttpSession;
 import zemian.service.logging.Logger;
 
 @WebServlet("/password")
-public class PasswordServlet extends HtmlWriterServlet {
+public class PasswordServlet  extends HtmlWriterServlet {
     private static final Logger LOGGER = new Logger(PasswordServlet.class);
     private static final String PASSWORD = "test123"; // Hide me.
     
     @Override
-    protected void writeContent(HtmlWriter html) {        
-        String message;
-        if (html.getReq().getParameter("logout") != null) {
-            removeSessionData(html.getReq());
-            message = "Your have successfully logged out.";
-        } else {
-            message = (String)html.getReq().getAttribute("message");
-        }        
-        if (message ==  null) {
-            message = "";
-        }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HtmlWriter html = createHtmlWriter(req, resp); 
+        String message = getMessage(req);
         
         html.header()
             .h(1, "Restricted Area: Please Enter Password")
             .p(message)
-            .out("<form method='post' action='password'>")
-            .out("<p/><input type='password' name='password'/>")
-            .out("<p/><input type='submit' value='Submit'/>")
-            .out("</form>")
-            .out(html.link("Back to Home", "/index"))
+            .println("<form method='post' action='password'>")
+            .println("<p/><input type='password' name='password'/>")
+            .println("<p/><input type='submit' value='Submit'/>")
+            .println("</form>")
+            .println(html.link("Back to Home", "/index"))
             .footer();
     }
 
@@ -69,5 +61,19 @@ public class PasswordServlet extends HtmlWriterServlet {
         if (session != null) {
             session.removeAttribute(SessionData.SESSION_DATA_KEY);
         }
+    }
+
+    private String getMessage(HttpServletRequest req) {
+        String message;
+        if (req.getParameter("logout") != null) {
+            removeSessionData(req);
+            message = "Your have successfully logged out.";
+        } else {
+            message = (String)req.getAttribute("message");
+        }        
+        if (message ==  null) {
+            message = "";
+        }
+        return message;
     }
 }
