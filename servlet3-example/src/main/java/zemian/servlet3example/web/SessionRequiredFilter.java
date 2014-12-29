@@ -20,7 +20,7 @@ import zemian.service.logging.Logger;
  *
  * @author zedeng
  */
-@WebFilter(urlPatterns={"/sys-props/*"})
+@WebFilter(urlPatterns={"/sys-props", "/config"})
 public class SessionRequiredFilter implements Filter {
     private static final Logger LOGGER = new Logger(SessionRequiredFilter.class);
     

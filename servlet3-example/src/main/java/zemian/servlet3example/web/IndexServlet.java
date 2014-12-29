@@ -22,6 +22,7 @@ public class IndexServlet extends HtmlWriterServlet {
                 html.link("Index", "/index"),
                 html.link("Hello", "/hello"),
                 html.link("Form", "/form"),
+                html.link("App Config Props (Password needed)", "/config"),
                 html.link("Sys Props (Password needed)", "/sys-props")
             )
             .footer();
