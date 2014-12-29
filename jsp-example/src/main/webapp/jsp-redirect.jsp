@@ -1,2 +1,2 @@
 <%-- This should redirect back to home page --%>
-<% response.sendRedirect("index.jsp"); %>
+<% response.sendRedirect(request.getContextPath() + "/index.jsp"); %>
