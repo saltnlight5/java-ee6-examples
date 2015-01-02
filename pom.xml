@@ -13,6 +13,7 @@
         <module>servlet3-example</module>
         <module>jsp-example</module>
         <module>mvc-example</module>
+        <module>cdi-example</module>
         <module>jpa-example</module>
         <module>rest-example</module>
         <module>jsf-example</module>
