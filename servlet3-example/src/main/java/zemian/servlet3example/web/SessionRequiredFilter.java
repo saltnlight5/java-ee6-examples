@@ -20,9 +20,10 @@ import zemian.service.logging.Logger;
  *
  * @author zedeng
  */
-@WebFilter(urlPatterns={"/sys-props", "/config"})
+@WebFilter(urlPatterns={"/sys-props", "/user"})
 public class SessionRequiredFilter implements Filter {
     private static final Logger LOGGER = new Logger(SessionRequiredFilter.class);
+    public static final String LOGIN_REDIRECT = "LOGIN_REDIRECT";
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -35,9 +36,10 @@ public class SessionRequiredFilter implements Filter {
             LOGGER.trace("Checking session data for uri=%s", req.getRequestURI());
             HttpSession session = req.getSession(false);
             if (session == null || session.getAttribute(SessionData.SESSION_DATA_KEY) == null) {
-                LOGGER.debug("No session data found for current request uri=%s. Redirect to password page.", req.getRequestURI());
-                //throw new RuntimeException("Session Data not found.");
-                req.getRequestDispatcher("/password").forward(request, response);
+                LOGGER.debug("No session data found for current request uri=%s. Forward request to login page.", req.getRequestURI());
+                // We need to save the old URI so we can auto redirect after login.
+                req.setAttribute(LOGIN_REDIRECT, req.getRequestURI());
+                req.getRequestDispatcher("/login").forward(request, response);
             }
         }
         chain.doFilter(request, response);

@@ -16,7 +16,7 @@ public class Application {
     
     private static Application INSTANCE = new Application();
     
-    private File configFile;
+    private UserService userService = new UserService();
     
     private Application() {
     }
@@ -27,14 +27,18 @@ public class Application {
     
     public void init() {
         String userHome = System.getProperty("user.home");
-        configFile = new File(userHome + "/servlet3example-config.properties");
+        File userFile = new File(userHome + "/java-ee-example/servlet3example-users.properties");
+        if (userFile.exists()) {
+            userService.loadFromFile(userFile);
+        } else {
+            userService.loadFromResource("/zemian/servlet3example/service/users.properties");
+        }
     }
     
     public void destroy() {        
     }
 
-    public File getConfigFile() {
-        return configFile;
-    }
-    
+    public UserService getUserService() {
+        return userService;
+    }   
 }

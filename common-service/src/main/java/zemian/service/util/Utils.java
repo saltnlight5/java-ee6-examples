@@ -4,10 +4,24 @@
 
 package zemian.service.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A utility class that provide general programming helpers.
@@ -61,6 +75,80 @@ public class Utils {
         for (T e : elements) {
             result.add(e);
         }
+        return result;
+    }
+    
+    public static Properties readProps(File file) {
+        Properties result = new Properties();
+        try (FileReader reader = new FileReader(file)) {
+            result.load(reader);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        return result;
+    }
+        
+    /** Read a UTF-8 text file into a list of String. */
+    public static List<String> readLines(File file) {
+        try {
+            return Files.readAllLines(Paths.get(file.toURI()), Charset.forName("UTF-8"));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    /** Write all lines into file. I will not insert new line characters! */
+    public static void writeLines(File file, String ... lines) {
+        try (FileWriter writer = new FileWriter(file)) {
+            for (String line : lines) {
+                writer.write(line);
+            }
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    /** 
+     * Get a resource file/stream from current classpath and return its text lines. 
+     * NOTE: You should not prefix '/' in front of resource name!
+     */
+    public static List<String> readResourceLines(String resourceName) {
+        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
+        if (stream == null)
+            throw new RuntimeException("Resource not found: " + resourceName);
+        List<String> result = new ArrayList<String>();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) { 
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                result.add(line);
+            }
+            return result;
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    /** 
+     * Get a Properties file/stream from current classpath and return its text lines. 
+     * NOTE: You should not prefix '/' in front of resource name!
+     */
+    public static Properties readResourceProps(String resourceName) {
+        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
+        if (stream == null)
+            throw new RuntimeException("Resource not found: " + resourceName);
+        Properties props = new Properties();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) { 
+            props.load(reader);
+            return props;
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public static boolean isEmpty(String text) {
+        boolean result = false;
+        if (text == null || text.trim().equals(""))
+            result = true;
         return result;
     }
 }

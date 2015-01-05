@@ -16,14 +16,14 @@ public class IndexServlet extends HtmlWriterServlet {
         
         html.header()
             .h(1, "Welcome to Servlet 3 Example")
-            .p("Let's explore Java Servlet 3.x Features.")
             .p(message)
+            .p("Let's explore Java Servlet 3.x Features.")
             .ul(
                 html.link("Index", "/index"),
                 html.link("Hello", "/hello"),
                 html.link("Form", "/form"),
-                html.link("App Config Props (Password needed)", "/config"),
-                html.link("Sys Props (Password needed)", "/sys-props")
+                html.link("Sys Props", "/sys-props"),
+                html.link("List of users", "/user")
             )
             .footer();
     }
@@ -33,8 +33,8 @@ public class IndexServlet extends HtmlWriterServlet {
         String message = "";
         SessionData sd = getOptionalSessionData(req);
         if (sd != null) {
-            message = "You are currently logged in since " + sd.getDateCreated();
-            message += "(" + html.link("Logout", "/password?logout") + ")";
+            message = "Welcome " + sd.getUsername() + "! You have been logged in since " + sd.getDateCreated();
+            message += "(" + html.link("Logout", "/login?logout") + ")";
         }
         return message;
     }
