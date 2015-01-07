@@ -48,9 +48,9 @@ public class FormServlet extends HtmlWriterServlet {
         form.setPassword(req.getParameter("password"));
         form.setNotes(req.getParameter("notes"));
         form.setCountry(req.getParameter("country"));
-        String[] langAry = req.getParameterValues("skills");
-        langAry = (langAry == null) ? new String[0] : langAry;
-        form.setLanguages(Arrays.asList(langAry));
+        String[] skills = req.getParameterValues("skills");
+        skills = (skills == null) ? new String[0] : skills;
+        form.setSkills(Arrays.asList(skills));
         req.setAttribute("message", "Processed: " + form);
         doGet(req, resp);
     }
@@ -86,11 +86,11 @@ public class FormServlet extends HtmlWriterServlet {
             this.password = password;
         }
 
-        public List<String> getLanguages() {
+        public List<String> getSkills() {
             return skills;
         }
 
-        public void setLanguages(List<String> skills) {
+        public void setSkills(List<String> skills) {
             this.skills = skills;
         }
 
