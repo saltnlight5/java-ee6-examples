@@ -12,6 +12,7 @@ mvn -pl java-ee6-examples package
 
 = References
 JSP Home page: http://www.oracle.com/technetwork/java/index-jsp-135995.html
+Tutorial on JSP: http://www.tutorialspoint.com/jsp/index.htm
 
 JSP tutorial: http://docs.oracle.com/javaee/5/tutorial/doc/bnagx.html
 
