@@ -1,16 +1,21 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:body>
-        <h1>Welcome to EE 6 JSF Examples</h1>
-        <p>Explore built-in JSF components.</p>
-        <ul>
-            <li><h:link value="Welcome" outcome="welcome" /></li>
-            <li><h:link value="Hello" outcome="hello" /></li>
-            <li><h:link value="Form Inputs" outcome="form-inputs" /></li>
-            <li><h:link value="Form Selections" outcome="form-selections" /></li>
-            <li><h:link value="File Listing" outcome="file-listing" /></li>
-            <li><h:link value="Table Data" outcome="table-data" /></li>
-        </ul>
-        <p>Page created on: #{welcome.currentTime}</p>
+        <ui:composition template="template.xhtml">
+            <ui:define name="content">
+                <h1>Welcome to EE 6 JSF Examples</h1>
+                <p>Explore built-in JSF components.</p>
+                <ul>
+                    <li><h:link value="Welcome" outcome="welcome" /></li>
+                    <li><h:link value="Hello" outcome="hello" /></li>
+                    <li><h:link value="Form Inputs" outcome="form-inputs" /></li>
+                    <li><h:link value="Form Selections" outcome="form-selections" /></li>
+                    <li><h:link value="File Listing" outcome="file-listing" /></li>
+                    <li><h:link value="Table Data" outcome="table-data" /></li>
+                </ul>
+                <p>Page created on: #{welcome.currentTime}</p>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

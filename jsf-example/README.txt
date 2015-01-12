@@ -18,3 +18,4 @@ controller and *.xhtml as view.
 
 - JSF tutorial 
     * http://www.tutorialspoint.com/jsf/index.htm
+    * http://www.jsftoolbox.com/documentation/help/12-TagReference/core/index.jsf
