@@ -21,9 +21,11 @@ public class IndexServlet extends HtmlWriterServlet {
             .ul(
                 html.link("Index", "/index"),
                 html.link("Hello", "/hello"),
+                html.link("Table Display", "/tables"),
                 html.link("Form", "/form"),
                 html.link("Sys Props", "/sys-props"),
-                html.link("List of users", "/user")
+                html.link("List of users", "/user"),
+                html.link("Thread Execution Information", "/thread-info")
             )
             .footer();
     }

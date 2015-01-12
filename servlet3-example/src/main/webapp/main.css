@@ -1,0 +1,19 @@
+/* Table Styling */
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+tr.odd {
+    background: white
+}
+tr.even {
+    background: lightgray
+}
+td {
+    padding: 15px;
+    vertical-align: top;
+}
+th {
+    background-color: black;
+    color: white;
+}

@@ -4,6 +4,7 @@
 
 package zemian.servlet3example.web;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -11,7 +12,8 @@ import java.util.UUID;
  *
  * @author zedeng
  */
-public class SessionData {
+public class SessionData implements Serializable {
+    private static final long serialVersionUID = 1L;
     public static final String SESSION_DATA_KEY = "zemian.servlet3example.web.SessionData";
     private String id = UUID.randomUUID().toString();
     private Date dateCreated = new Date();
