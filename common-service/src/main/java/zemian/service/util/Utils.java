@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,22 +59,32 @@ public class Utils {
     }
     
     public static Map<String, Object> map(Object ... pairs) {
-        if (pairs.length % 2 != 0)
-            throw new IllegalArgumentException("Arguments count is not even pairs");
-        
-        Map<String, Object> result = new HashMap<>();
-        for (int i = 0; i < pairs.length; i += 2) {
-            Object key = pairs[i];
-            Object value = pairs[i + 1];
-            result.put(key.toString(), value);
-        }
+        Map<String, Object> result = new HashMap();
+        fillMap(result, pairs);
         return result;
     }
     
-    public static <T> List<T> list(T ... elements) {
+    public static Map<String, Object> sortedMap(Object ... pairs) {
+        Map<String, Object> result = new TreeMap();
+        fillMap(result, pairs);
+        return result;
+    }
+    
+    public static void fillMap(Map<String, Object> map, Object ... pairs) {
+        if (pairs.length % 2 != 0)
+            throw new IllegalArgumentException("Arguments count is not even pairs");
+        
+        for (int i = 0; i < pairs.length; i += 2) {
+            Object key = pairs[i];
+            Object value = pairs[i + 1];
+            map.put(key.toString(), value);
+        }
+    }
+    
+    public static <T> List<T> list(Object ... elements) {
         List<T> result = new ArrayList<>();
-        for (T e : elements) {
-            result.add(e);
+        for (Object e : elements) {
+            result.add((T)e);
         }
         return result;
     }
