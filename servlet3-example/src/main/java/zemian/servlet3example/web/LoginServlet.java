@@ -33,7 +33,6 @@ public class LoginServlet  extends HtmlWriterServlet {
             .println("<p/>Password: <input type='password' name='password'/>")
             .println("<p/><input type='submit' value='Submit'/>")
             .println("</form>")
-            .println(html.link("Back to Home", "/index"))
             .footer();
     }
 

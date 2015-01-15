@@ -40,6 +40,9 @@ public class HtmlWriter {
         writer.println("  <link rel='stylesheet' type='text/css' href='" + contextPath + "/main.css'>");
         writer.println("</header>");
         writer.println("<body>");
+        writer.println("<ul class='navlist'>");
+        writer.println("<li>" + link("Home", "/index") + "</li>");
+        writer.println("</ul>");
         return this;
     }
 

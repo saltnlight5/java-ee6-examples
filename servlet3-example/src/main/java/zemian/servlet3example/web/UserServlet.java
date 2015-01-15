@@ -21,7 +21,7 @@ public class UserServlet extends HtmlWriterServlet {
         Collections.sort(users);
         HtmlWriter html = createHtmlWriter(req, resp);
         html.header()
-            .h(1, "List of USers")
+            .h(1, "List of Users")
             .ul(users)
             .footer();
     }

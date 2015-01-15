@@ -36,7 +36,6 @@ public class FormServlet extends HtmlWriterServlet {
             .println("<p/>Notes: <textarea name='notes' cols='50' rows='3'></textarea>")
             .println("<p/><input type='submit' value='Submit'/>")
             .println("</form>")
-            .println(html.link("Back to Home", "/index"))
             .footer();
     }
 
