@@ -1,6 +1,13 @@
+/* Horizontal Navigation List */
+ul.navlist li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
 /* List Styling */
 ul {
-    list-style-type: square;
+    list-style-type: circle;
     list-style-position: outside;
     list-style-image: none;
 }

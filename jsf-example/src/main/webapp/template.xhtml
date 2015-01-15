@@ -6,8 +6,20 @@
         <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
     <h:body>
-        <ui:insert name="content">
-            <h1>Welcome to EE 6 JSF Examples</h1>
-    	</ui:insert>
+        <div id="navlist">
+            <ul class="navlist">
+                <li><h:link value="Welcome" outcome="welcome" /></li>
+                <li><h:link value="Hello" outcome="hello" /></li>
+                <li><h:link value="Form Inputs" outcome="form-inputs" /></li>
+                <li><h:link value="Form Selections" outcome="form-selections" /></li>
+                <li><h:link value="File Listing" outcome="file-listing" /></li>
+                <li><h:link value="Table Data" outcome="table-data" /></li>
+            </ul>
+        </div>
+        <div id="content">
+            <ui:insert name="content">
+                <h1>Welcome to EE 6 JSF Examples</h1>
+            </ui:insert>
+        </div>
     </h:body>
 </html>
