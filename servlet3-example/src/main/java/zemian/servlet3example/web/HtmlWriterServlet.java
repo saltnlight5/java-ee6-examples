@@ -25,15 +25,6 @@ public abstract class HtmlWriterServlet extends HttpServlet {
         }
     }
     
-    /** Return LoginSession if found in HttpSession scope, else return NULL value. */
-    protected LoginSession getOptionalLoginSession(HttpServletRequest req) {
-        LoginSession result = null;
-        HttpSession session = req.getSession(false);
-        if (session != null)
-            result = (LoginSession)session.getAttribute(LoginSession.LOGIN_SESSION_KEY);
-        return result;
-    }
-    
     protected String header(HtmlWriter html) {
         String contextPath = getServletContext().getContextPath();
         StringBuilder sb = new StringBuilder();

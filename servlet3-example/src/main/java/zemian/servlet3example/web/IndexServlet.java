@@ -15,8 +15,8 @@ public class IndexServlet extends HtmlWriterServlet {
         String message = getMessage(req, html);
         
         html.header()
-            .h(1, "Welcome to Servlet 3 Example")
             .p(message)
+            .h(1, "Welcome to Servlet 3 Example")
             .p("Let's explore Java Servlet 3.x Features.")
             .ul(
                 html.link("Index", "/index"),
@@ -33,9 +33,10 @@ public class IndexServlet extends HtmlWriterServlet {
     private String getMessage(HttpServletRequest req, HtmlWriter html) {
         // Construct a server message based on user logged in with session data or not.
         String message = "";
-        LoginSession sd = getOptionalLoginSession(req);
-        if (sd != null) {
-            message = "Welcome " + sd.getUsername() + "! You have been logged in since " + sd.getDateCreated();
+        LoginSession loginSession = LoginServlet.getOptionalLoginSession(req);
+        if (loginSession != null) {
+            message = "Welcome " + loginSession.getUsername() + 
+                    "! You have been logged in since " + loginSession.getDateCreated();
             message += "(" + html.link("Logout", "/login?logout") + ")";
         }
         return message;

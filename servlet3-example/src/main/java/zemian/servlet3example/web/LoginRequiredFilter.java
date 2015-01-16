@@ -34,14 +34,17 @@ public class LoginRequiredFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
-            HttpServletRequest req = (HttpServletRequest) request;            
-            LOGGER.trace("Checking session data for uri=%s", req.getRequestURI());
-            HttpSession session = req.getSession(false);
-            if (session == null || session.getAttribute(LoginSession.LOGIN_SESSION_KEY) == null) {
-                LOGGER.debug("No session data found for current request uri=%s. Forward request to login page.", req.getRequestURI());
+            HttpServletRequest req = (HttpServletRequest) request;
+            LOGGER.trace("Checking LoginSession token for uri=%s", req.getRequestURI());
+            LoginSession loginSession = LoginServlet.getOptionalLoginSession(req);
+            if (loginSession == null) {
+                LOGGER.debug("No LoginSession token found; forwarding request to login page.");
                 // We need to save the old URI so we can auto redirect after login.
                 req.setAttribute(LOGIN_REDIRECT, req.getRequestURI());
                 req.getRequestDispatcher("/login").forward(request, response);
+                return;
+            } else {
+                LOGGER.debug("Request allowed using LoginSession token=%s", loginSession.getId());
             }
         }
         chain.doFilter(request, response);

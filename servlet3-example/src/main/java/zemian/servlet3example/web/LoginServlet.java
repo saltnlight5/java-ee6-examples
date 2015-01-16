@@ -17,8 +17,20 @@ public class LoginServlet  extends HtmlWriterServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HtmlWriter html = createHtmlWriter(req, resp); 
-        String message = getMessage(req);
+        String message;
         
+        // Check to see if we are doing logout or not.
+        LoginSession loginSession = getOptionalLoginSession(req);
+        if (loginSession != null && req.getParameter("logout") != null) {
+            logout(req);
+            message = "Your have successfully logged out.";
+        } else {    
+            message = (String)req.getAttribute("message");
+            if (message == null)
+                message = "";
+        }   
+        
+        // Show a login form
         String redirectUri = (String)req.getAttribute(LoginRequiredFilter.LOGIN_REDIRECT);
         String redirectHtmlTag = "";
         if (redirectUri != null) {
@@ -39,32 +51,17 @@ public class LoginServlet  extends HtmlWriterServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.debug("Processing login form.");
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        String redirectUri = req.getParameter("redirectUri");
-        
-        UserService userService = Application.getInstance().getUserService();
-        if (userService.validPassword(username, password)) {
-            LOGGER.info("User %s logged in successfully.", username);
-            // Create Session Data here after successful authenticated.
-            LoginSession loginsession = getOptionalLoginSession(req);
-            if (loginsession == null) {
-                createLoginSession(req, username);
-                // We should auto redirect user if exists.
-                if (redirectUri != null) {
-                    LOGGER.debug("Redirect after login to: %s", redirectUri);
-                    resp.sendRedirect(redirectUri);
-                } else {
-                    req.setAttribute("message", "You have successfully logged in.");
-                }
-            } else {
-                req.setAttribute("message", "You already have logged in.");             
+        if (login(req)) {
+            // Login succeed, we should auto redirect user if exists.
+            String redirectUri = req.getParameter("redirectUri");
+            if (redirectUri != null) {
+                LOGGER.debug("Redirect after login to: %s", redirectUri);
+                resp.sendRedirect(redirectUri);
+                return;
             }
-        } else {
-            LOGGER.info("User %s failed to login.", username);
-            req.setAttribute("message", "Invalid login.");
         }
         
+        // Show the form again in case login failed or user didn't provide a redirect
         doGet(req, resp);
     }    
        
@@ -81,17 +78,39 @@ public class LoginServlet  extends HtmlWriterServlet {
         }
     }
 
-    private String getMessage(HttpServletRequest req) {
-        String message;
-        if (req.getParameter("logout") != null) {
-            removeLoginSession(req);
-            message = "Your have successfully logged out.";
+    private boolean login(HttpServletRequest req) throws IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        
+        UserService userService = Application.getInstance().getUserService();
+        if (userService.validPassword(username, password)) {
+            LOGGER.info("User %s logged in successfully.", username);
+            // Create Session Data here after successful authenticated.
+            LoginSession loginsession = getOptionalLoginSession(req);
+            if (loginsession == null) {
+                createLoginSession(req, username);
+                req.setAttribute("message", "You have successfully logged in.");
+            } else {
+                req.setAttribute("message", "You already have logged in.");             
+            }
         } else {
-            message = (String)req.getAttribute("message");
-        }        
-        if (message ==  null) {
-            message = "";
+            LOGGER.info("User %s failed to login.", username);
+            req.setAttribute("message", "Invalid login.");
         }
-        return message;
+        return true;
+    }
+
+    private void logout(HttpServletRequest req) {
+        removeLoginSession(req);
+        req.getSession().invalidate();
+    }
+    
+    /** Return LoginSession if found in HttpSession scope, else return NULL value. */
+    public static LoginSession getOptionalLoginSession(HttpServletRequest req) {
+        LoginSession result = null;
+        HttpSession session = req.getSession(false);
+        if (session != null)
+            result = (LoginSession)session.getAttribute(LoginSession.LOGIN_SESSION_KEY);
+        return result;
     }
 }
