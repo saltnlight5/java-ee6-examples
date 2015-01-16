@@ -13,31 +13,45 @@ import zemian.service.util.Utils;
 
 /**
  * User DAO that uses Properties file to store users info.
+ *  
  * @author zedeng
  */
 public class UserService {
     private static final Logger LOGGER = new Logger(UserService.class);
     // Username and password store
-    private Properties users = new Properties();
-    
-    public void loadFromFile(File file) {
-        LOGGER.info("Loading users from file: %s", file);
-        users = Utils.readProps(file);
+    private Properties usersProps = new Properties();
+        
+    /**
+     * Load $HOME/java-ee-example/servlet3example-users.properties if exists, else it will
+     * use the one in classpath under "/zemian/servlet3example/service/users.properties".
+     * 
+     * @throws RuntimeException - if both file and resource name not found. 
+     */
+    public void init() {
+        String userHome = System.getProperty("user.home");
+        File userFile = new File(userHome + "/java-ee-example/servlet3example-users.properties");
+        if (userFile.exists()) {
+            LOGGER.info("Loading users from file: %s", userFile);
+            usersProps = Utils.readProps(userFile);
+        } else {
+            String resourceName = "/zemian/servlet3example/service/users.properties";
+            LOGGER.info("Loading users from classpath resource: %s", resourceName);
+            usersProps = Utils.readResourceProps(resourceName);
+        }
     }
     
-    public void loadFromResource(String resourceName) {
-        LOGGER.info("Loading users from classpath resource: %s", resourceName);
-        users = Utils.readResourceProps(resourceName);
+    public void destroy() {
+        // Do nothing.
     }
         
-    public boolean validPassword(String username, String password) {
-        String storedPassword = users.getProperty(username);
+    public boolean validate(String username, String password) {
+        String storedPassword = usersProps.getProperty(username);
         return storedPassword != null && storedPassword.equals(password);
     }
     
     public Set<String> getUsers() {
         Set<String> result = new HashSet<>();
-        for (String username : users.stringPropertyNames())
+        for (String username : usersProps.stringPropertyNames())
             result.add(username);
         return result;
     }

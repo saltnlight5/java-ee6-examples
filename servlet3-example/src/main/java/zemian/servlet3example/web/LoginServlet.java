@@ -83,7 +83,7 @@ public class LoginServlet  extends HtmlWriterServlet {
         String password = req.getParameter("password");
         
         UserService userService = Application.getInstance().getUserService();
-        if (userService.validPassword(username, password)) {
+        if (userService.validate(username, password)) {
             LOGGER.info("User %s logged in successfully.", username);
             // Create Session Data here after successful authenticated.
             LoginSession loginsession = getOptionalLoginSession(req);

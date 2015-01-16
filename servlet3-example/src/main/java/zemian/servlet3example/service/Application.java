@@ -26,16 +26,11 @@ public class Application {
     }
     
     public void init() {
-        String userHome = System.getProperty("user.home");
-        File userFile = new File(userHome + "/java-ee-example/servlet3example-users.properties");
-        if (userFile.exists()) {
-            userService.loadFromFile(userFile);
-        } else {
-            userService.loadFromResource("/zemian/servlet3example/service/users.properties");
-        }
+        userService.init();
     }
     
-    public void destroy() {        
+    public void destroy() {   
+        userService.destroy();     
     }
 
     public UserService getUserService() {
