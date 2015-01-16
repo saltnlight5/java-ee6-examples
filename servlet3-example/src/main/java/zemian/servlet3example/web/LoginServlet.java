@@ -47,9 +47,9 @@ public class LoginServlet  extends HtmlWriterServlet {
         if (userService.validPassword(username, password)) {
             LOGGER.info("User %s logged in successfully.", username);
             // Create Session Data here after successful authenticated.
-            LoginSession sd = getOptionalLoginSession(req);
-            if (sd == null) {
-                createSessionData(req, username);
+            LoginSession loginsession = getOptionalLoginSession(req);
+            if (loginsession == null) {
+                createLoginSession(req, username);
                 // We should auto redirect user if exists.
                 if (redirectUri != null) {
                     LOGGER.debug("Redirect after login to: %s", redirectUri);
@@ -68,13 +68,13 @@ public class LoginServlet  extends HtmlWriterServlet {
         doGet(req, resp);
     }    
        
-    protected LoginSession createSessionData(HttpServletRequest req, String username) {
+    protected LoginSession createLoginSession(HttpServletRequest req, String username) {
         LoginSession result = new LoginSession(username);
         req.getSession(true).setAttribute(LoginSession.LOGIN_SESSION_KEY, result);
         return result;
     }
     
-    protected void removeSessionData(HttpServletRequest req) {
+    protected void removeLoginSession(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.removeAttribute(LoginSession.LOGIN_SESSION_KEY);
@@ -84,7 +84,7 @@ public class LoginServlet  extends HtmlWriterServlet {
     private String getMessage(HttpServletRequest req) {
         String message;
         if (req.getParameter("logout") != null) {
-            removeSessionData(req);
+            removeLoginSession(req);
             message = "Your have successfully logged out.";
         } else {
             message = (String)req.getAttribute("message");
