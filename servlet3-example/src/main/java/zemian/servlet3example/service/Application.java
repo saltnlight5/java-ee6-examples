@@ -4,8 +4,6 @@
 
 package zemian.servlet3example.service;
 
-import java.io.File;
-
 /**
  * A singleton application context space to store global variables and states.
  * 
