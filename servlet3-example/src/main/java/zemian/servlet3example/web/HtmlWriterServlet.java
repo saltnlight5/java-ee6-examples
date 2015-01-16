@@ -12,20 +12,47 @@ public abstract class HtmlWriterServlet extends HttpServlet {
     
     protected HtmlWriter createHtmlWriter(HttpServletRequest req, HttpServletResponse resp) {
         try {
+            // Create a HtmlWriter that's customized for this application, such
+            // as header and footer.
             HtmlWriter writer = new HtmlWriter();
             writer.setWriter(resp.getWriter());
             writer.setContextPath(req.getContextPath());
+            writer.setHeader(header(writer));
+            writer.setFooter(footer(writer));
             return writer;
         } catch (IOException e) {
-            throw new RuntimeException("Failed to get response Writer.", e);
+            throw new RuntimeException("Failed to create HtmlWriter.", e);
         }
     }
     
-    protected LoginSession getOptionalSessionData(HttpServletRequest req) {
+    /** Return LoginSession if found in HttpSession scope, else return NULL value. */
+    protected LoginSession getOptionalLoginSession(HttpServletRequest req) {
         LoginSession result = null;
         HttpSession session = req.getSession(false);
         if (session != null)
             result = (LoginSession)session.getAttribute(LoginSession.LOGIN_SESSION_KEY);
         return result;
+    }
+    
+    protected String header(HtmlWriter html) {
+        String contextPath = getServletContext().getContextPath();
+        StringBuilder sb = new StringBuilder();
+        sb.append("<!DOCTYPE html>");
+        sb.append("<html>");
+        sb.append("<header>");
+        sb.append("  <link rel='stylesheet' type='text/css' href='" + contextPath + "/main.css'>");
+        sb.append("</header>");
+        sb.append("<body>");
+        sb.append("<ul class='navlist'>");
+        sb.append("<li>" + html.link("Home", "/index") + "</li>");
+        sb.append("</ul>");
+        return sb.toString();
+    }
+
+    protected String footer(HtmlWriter html) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<body>");
+        sb.append("</html>");
+        return sb.toString();
     }
 }

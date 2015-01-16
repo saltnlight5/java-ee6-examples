@@ -9,12 +9,13 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- *
+ * A application session object that holds logged in user information.
+ * 
  * @author zedeng
  */
 public class LoginSession implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String LOGIN_SESSION_KEY = "zemian.servlet3example.web.LoginSession";
+    public static final String LOGIN_SESSION_KEY = LoginSession.class.getSimpleName();
     private String id = UUID.randomUUID().toString();
     private Date dateCreated = new Date();
     private String username;

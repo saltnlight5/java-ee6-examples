@@ -13,12 +13,23 @@ import java.util.Map;
 import zemian.service.util.Utils;
 
 /**
- *
+ * A Html Builder or Writer class that helps generate HTML output.
+ * 
  * @author zedeng
  */
 public class HtmlWriter {
     private PrintWriter writer;
     private String contextPath;
+    private String header;
+    private String footer;
+
+    public void setHeader(String header) {
+        this.header = header;
+    }
+
+    public void setFooter(String footer) {
+        this.footer = footer;
+    }
 
     public void setWriter(PrintWriter writer) {
         this.writer = writer;
@@ -28,30 +39,41 @@ public class HtmlWriter {
         this.contextPath = contextPath;
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    // These are general helper methods to generate HTML page.
+    ////////////////////////////////////////////////////////////////////////////
     public HtmlWriter println(String text) {
         writer.println(text);
         return this;
     }
 
     public HtmlWriter header() {
+        if (header != null) {
+            writer.println(header);
+            return this;
+        }
+        
         writer.println("<!DOCTYPE html>");
         writer.println("<html>");
-        writer.println("<header>");
-        writer.println("  <link rel='stylesheet' type='text/css' href='" + contextPath + "/main.css'>");
-        writer.println("</header>");
         writer.println("<body>");
-        writer.println("<ul class='navlist'>");
-        writer.println("<li>" + link("Home", "/index") + "</li>");
-        writer.println("</ul>");
         return this;
     }
 
     public HtmlWriter footer() {
+        if (footer != null) {
+            writer.println(footer);
+            return this;
+        }
+        
         writer.println("<body>");
         writer.println("</html>");
         return this;
     }
 
+    ////////////////////////////////////////////////////////////////////////////
+    // These are builder methods that match and generate HTML elements from
+    // a Java objects input.
+    ////////////////////////////////////////////////////////////////////////////
     public HtmlWriter p(String text) {
         writer.println("<p>" + text + "</p>");
         return this;
@@ -138,6 +160,10 @@ public class HtmlWriter {
         return this;
     }
     
+    ////////////////////////////////////////////////////////////////////////////
+    // These are extra utitlity methods that help build html partial elements,
+    // and thus not returing the HtmlWriter object it self.
+    ////////////////////////////////////////////////////////////////////////////
     public String link(String label, String url) {
         return "<a href=\"" + contextPath + url + "\">" + label + "</a>";
     }

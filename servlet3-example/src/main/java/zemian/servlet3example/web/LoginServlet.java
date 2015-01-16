@@ -47,7 +47,7 @@ public class LoginServlet  extends HtmlWriterServlet {
         if (userService.validPassword(username, password)) {
             LOGGER.info("User %s logged in successfully.", username);
             // Create Session Data here after successful authenticated.
-            LoginSession sd = getOptionalSessionData(req);
+            LoginSession sd = getOptionalLoginSession(req);
             if (sd == null) {
                 createSessionData(req, username);
                 // We should auto redirect user if exists.

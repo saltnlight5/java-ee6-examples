@@ -17,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import zemian.service.logging.Logger;
 
 /**
- *
+ * Restrict web resources to require users to be authenticated and LoginSession
+ * token to be present.
+ * 
  * @author zedeng
  */
 @WebFilter(urlPatterns={"/sys-props", "/user"})
@@ -47,6 +49,7 @@ public class LoginRequiredFilter implements Filter {
 
     @Override
     public void destroy() {
+        // Do nothing.
     }
 
 }
