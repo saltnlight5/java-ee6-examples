@@ -12,14 +12,14 @@ import java.util.UUID;
  *
  * @author zedeng
  */
-public class SessionData implements Serializable {
+public class LoginSession implements Serializable {
     private static final long serialVersionUID = 1L;
-    public static final String SESSION_DATA_KEY = "zemian.servlet3example.web.SessionData";
+    public static final String LOGIN_SESSION_KEY = "zemian.servlet3example.web.LoginSession";
     private String id = UUID.randomUUID().toString();
     private Date dateCreated = new Date();
     private String username;
     
-    public SessionData(String username) {
+    public LoginSession(String username) {
         this.username = username;
     }
 

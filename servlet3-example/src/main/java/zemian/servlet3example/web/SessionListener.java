@@ -5,6 +5,10 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 import zemian.service.logging.Logger;
 
+/**
+ * Just a session listener demo that LOG a message whenever a HTTP session object is created.
+ * @author zedeng
+ */
 @WebListener
 public class SessionListener implements HttpSessionListener {
     private static final Logger LOGGER = new Logger(SessionListener.class);

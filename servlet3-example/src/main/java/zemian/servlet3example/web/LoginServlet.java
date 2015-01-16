@@ -19,7 +19,7 @@ public class LoginServlet  extends HtmlWriterServlet {
         HtmlWriter html = createHtmlWriter(req, resp); 
         String message = getMessage(req);
         
-        String redirectUri = (String)req.getAttribute(SessionRequiredFilter.LOGIN_REDIRECT);
+        String redirectUri = (String)req.getAttribute(LoginRequiredFilter.LOGIN_REDIRECT);
         String redirectHtmlTag = "";
         if (redirectUri != null) {
             redirectHtmlTag = "<input type='hidden' name='redirectUri' value='" + redirectUri + "'/>";
@@ -47,7 +47,7 @@ public class LoginServlet  extends HtmlWriterServlet {
         if (userService.validPassword(username, password)) {
             LOGGER.info("User %s logged in successfully.", username);
             // Create Session Data here after successful authenticated.
-            SessionData sd = getOptionalSessionData(req);
+            LoginSession sd = getOptionalSessionData(req);
             if (sd == null) {
                 createSessionData(req, username);
                 // We should auto redirect user if exists.
@@ -68,16 +68,16 @@ public class LoginServlet  extends HtmlWriterServlet {
         doGet(req, resp);
     }    
        
-    protected SessionData createSessionData(HttpServletRequest req, String username) {
-        SessionData result = new SessionData(username);
-        req.getSession(true).setAttribute(SessionData.SESSION_DATA_KEY, result);
+    protected LoginSession createSessionData(HttpServletRequest req, String username) {
+        LoginSession result = new LoginSession(username);
+        req.getSession(true).setAttribute(LoginSession.LOGIN_SESSION_KEY, result);
         return result;
     }
     
     protected void removeSessionData(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.removeAttribute(SessionData.SESSION_DATA_KEY);
+            session.removeAttribute(LoginSession.LOGIN_SESSION_KEY);
         }
     }
 

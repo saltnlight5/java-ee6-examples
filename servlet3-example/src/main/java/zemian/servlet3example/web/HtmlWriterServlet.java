@@ -21,11 +21,11 @@ public abstract class HtmlWriterServlet extends HttpServlet {
         }
     }
     
-    protected SessionData getOptionalSessionData(HttpServletRequest req) {
-        SessionData result = null;
+    protected LoginSession getOptionalSessionData(HttpServletRequest req) {
+        LoginSession result = null;
         HttpSession session = req.getSession(false);
         if (session != null)
-            result = (SessionData)session.getAttribute(SessionData.SESSION_DATA_KEY);
+            result = (LoginSession)session.getAttribute(LoginSession.LOGIN_SESSION_KEY);
         return result;
     }
 }

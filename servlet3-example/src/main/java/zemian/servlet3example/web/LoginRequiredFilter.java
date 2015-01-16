@@ -21,8 +21,8 @@ import zemian.service.logging.Logger;
  * @author zedeng
  */
 @WebFilter(urlPatterns={"/sys-props", "/user"})
-public class SessionRequiredFilter implements Filter {
-    private static final Logger LOGGER = new Logger(SessionRequiredFilter.class);
+public class LoginRequiredFilter implements Filter {
+    private static final Logger LOGGER = new Logger(LoginRequiredFilter.class);
     public static final String LOGIN_REDIRECT = "LOGIN_REDIRECT";
     
     @Override
@@ -35,7 +35,7 @@ public class SessionRequiredFilter implements Filter {
             HttpServletRequest req = (HttpServletRequest) request;            
             LOGGER.trace("Checking session data for uri=%s", req.getRequestURI());
             HttpSession session = req.getSession(false);
-            if (session == null || session.getAttribute(SessionData.SESSION_DATA_KEY) == null) {
+            if (session == null || session.getAttribute(LoginSession.LOGIN_SESSION_KEY) == null) {
                 LOGGER.debug("No session data found for current request uri=%s. Forward request to login page.", req.getRequestURI());
                 // We need to save the old URI so we can auto redirect after login.
                 req.setAttribute(LOGIN_REDIRECT, req.getRequestURI());
