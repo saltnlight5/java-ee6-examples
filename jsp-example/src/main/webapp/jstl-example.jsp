@@ -31,7 +31,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
@@ -43,7 +43,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
@@ -55,7 +55,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
@@ -70,7 +70,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
@@ -82,7 +82,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
@@ -94,7 +94,7 @@
             <tr>
                 <td>${entry.key}</td>
                 <td>
-                    <c:out value="${apptutils:objUtilsToString(entry.value)}"/>
+                    <c:out value="${utils:toString(entry.value)}"/>
                 </td>
             </tr>
             </c:forEach>
