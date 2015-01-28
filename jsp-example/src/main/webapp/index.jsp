@@ -10,6 +10,7 @@
             <li><a href="${pageContext.request.contextPath}/jsp-vars.jsp">JSP Implicit Variables</a></li>
             <li><a href="${pageContext.request.contextPath}/jstl-example.jsp">JSTL Example</a></li>
             <li><a href="${pageContext.request.contextPath}/jsp-redirect.jsp">Redirect Back to Index</a></li>
+            <li><a href="${pageContext.request.contextPath}/tag-file-example.jsp">Custom Tag File Example</a></li>
         </ul>
         <p>Page served on <%= new java.util.Date()%></p>
     </body>

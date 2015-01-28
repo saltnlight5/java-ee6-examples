@@ -8,7 +8,7 @@ JavaServer Pages Standard Tag Library (JSTL) encapsulates as simple tags the cor
 To bulid this module alone, use this command
 
 cd java-ee6-examples
-mvn -pl java-ee6-examples package
+mvn -pl jsp-example package
 
 = References
 JSP Home page: http://www.oracle.com/technetwork/java/index-jsp-135995.html
