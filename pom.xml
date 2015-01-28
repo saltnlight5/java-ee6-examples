@@ -11,6 +11,7 @@
     <modules>
         <module>common-service</module>
         <module>servlet3-example</module>
+        <module>servlet3-cdi-example</module>
         <module>jsp-example</module>
         <module>mvc-example</module>
         <module>jsf-example</module>
