@@ -99,7 +99,5 @@
             </tr>
             </c:forEach>
         </table>
-        
-        <p>Page served on <%= new java.util.Date()%></p>
     </body>
 </html>
