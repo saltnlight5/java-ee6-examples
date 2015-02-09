@@ -1,0 +1,11 @@
+<%--
+NOTE that you can't create your own JSF extension using the default configuation.
+The .xhtml is required???
+
+http://localhost:8080/jsf-example/faces/mymapping.myxhtml
+--%>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+    <h:body>
+        <p>Custom Mapping with myhtml extension JSF bean. Msg = #{myMapping.message}</p>
+    </h:body>
+</html>

@@ -15,16 +15,27 @@
     * Check out source (include demos)
         svn checkout https://svn.java.net/svn/mojarra~svn/tags/2.1.29 mojarra-2.1.29
 
-- The EE6 tutorial is still show how to use web.xml config for JSF, but 
-JSF in Servlet 3.0 (EE6) will automatically map FacesServlet to *.jsf as 
-controller and *.xhtml as view.
-
     See http://docs.oracle.com/javaee/6/api/javax/faces/webapp/FacesServlet.html
 
 - JSF tutorial 
     * http://www.tutorialspoint.com/jsf/index.htm
     * http://www.jsftoolbox.com/documentation/help/12-TagReference/core/index.jsf
 	
+= JSF Servlet Mapping
+
+By default with Servlet 3.0, the FacesServlet will map to the following URLs.
+    /faces
+    *.jsf
+    *.faces
+
+with .xhtml as view extention. For example, for a src/main/webapp/hello.xhtml, 
+you may access it with any of these URLs:
+    http://localhost:8080/jsf-example/hello.jsf
+    http://localhost:8080/jsf-example/hello.faces
+    http://localhost:8080/jsf-example/faces/hello.xhtml
+
+NOTE that currently we can't map default JSF servlet url without the extension!
+See http://stackoverflow.com/questions/14438068/mapping-jsf-xhtml-files-to-no-extension
 
 == JSF and JSP/Servlet Versions
 
@@ -40,7 +51,7 @@ Servlet JSP JSTL EE    JSF
       xmlns:f="http://java.sun.com/jsf/core"      
       xmlns:h="http://java.sun.com/jsf/html">
     <h:body>
-		<p>Hello World.</p>
+	<p>Hello World.</p>
     </h:body>
 </html>
 
