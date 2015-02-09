@@ -1,12 +1,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:body>
-        <h1>Directory Listing: <pre>#{fileListing.dir.absolutePath}</pre></h1>
-        <ul>
-            <ui:repeat value="#{fileListing.files}" var="file">
-                <li>#{file.path}</li>
-            </ui:repeat>
-        </ul>
+        <ui:composition template="template.xhtml">
+            <ui:define name="content">                
+                <h1>Directory Listing: <pre>#{fileListing.dir.absolutePath}</pre></h1>
+                <ul>
+                    <ui:repeat value="#{fileListing.files}" var="file">
+                        <li>#{file.path}</li>
+                    </ui:repeat>
+                </ul>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
