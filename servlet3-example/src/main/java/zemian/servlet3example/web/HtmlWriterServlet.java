@@ -35,6 +35,8 @@ public abstract class HtmlWriterServlet extends HttpServlet {
         sb.append("<body>");
         sb.append("<ul class='navlist'>");
         sb.append("<li>" + html.link("Home", "/index") + "</li>");
+        sb.append("<li>" + html.link("Users", "/user") + "</li>");
+        sb.append("<li>" + html.link("System", "/sys-props") + "</li>");
         sb.append("</ul>");
         return sb.toString();
     }
