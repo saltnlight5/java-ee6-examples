@@ -4,6 +4,8 @@
 
 package zemian.service.util;
 
+import java.util.Objects;
+
 /**
  * A tuple of two elements.
  * 
@@ -29,6 +31,32 @@ public class Tuple<A, B> {
         this.b = b;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.a);
+        hash = 23 * hash + Objects.hashCode(this.b);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tuple<?, ?> other = (Tuple<?, ?>) obj;
+        if (!Objects.equals(this.a, other.a)) {
+            return false;
+        }
+        if (!Objects.equals(this.b, other.b)) {
+            return false;
+        }
+        return true;
+    }
+    
     @Override
     public String toString() {
         return "Tuple(a=" + a + ", b=" + b + ")";
