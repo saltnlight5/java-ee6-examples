@@ -38,7 +38,7 @@ public class Utils {
     }
 
     /**
-     * A safe and string converter that guarantee to return a string regardless
+     * A safe string converter that guarantee to return a string regardless
      * of input.
      */
     public static String toString(Object object) {
@@ -105,7 +105,10 @@ public class Utils {
         }
         return result;
     }
-
+    
+    public static Properties readProps(String fileName) {
+    	return readProps(new File(fileName));
+    }
     public static Properties readProps(File file) {
         Properties result = new Properties();
         try (FileReader reader = new FileReader(file)) {
@@ -115,7 +118,10 @@ public class Utils {
         }
         return result;
     }
-
+    
+    public static List<String> readLines(String fileName) {
+    	return readLines(new File(fileName));
+    }
     /**
      * Read a UTF-8 text file into a list of String.
      */
@@ -127,6 +133,9 @@ public class Utils {
         }
     }
 
+    public static void writeLines(String fileName, String... lines) {
+    	writeLines(new File(fileName), lines);
+    }
     /**
      * Write all lines into file. I will not insert new line characters!
      */
@@ -222,7 +231,7 @@ public class Utils {
                 se.eval(reader, bindings);
             }
         } catch (IOException | ScriptException e) {
-            throw new RuntimeException("Failed to evaluate script by engine: " + ext, e);
+            throw new RuntimeException("Failed to run script by engine: " + ext, e);
         }
     }
     
