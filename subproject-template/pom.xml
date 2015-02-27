@@ -10,8 +10,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <groupId>zemian</groupId>
+	
     <artifactId>subproject-template</artifactId>
     <packaging>war</packaging>
 
