@@ -9,12 +9,13 @@ package zemian.servlet3example.service;
  * 
  * @author zedeng
  */
-public class Application {
-    public static final String SERVLET_CONTEXT_KEY = "zemian.servlet3example.web.Application";
+public class Application implements Service {
+    public static final String SERVLET_CONTEXT_KEY = Application.class.getName();
     
     private static Application INSTANCE = new Application();
     
-    private UserService userService = new UserService();
+    private Config config;
+    private UserService userService;
     
     private Application() {
     }
@@ -23,15 +24,24 @@ public class Application {
         return INSTANCE;
     }
     
+    @Override
     public void init() {
+        config = new Config("config.properties");
+        
+        userService = new UserService();
         userService.init();
     }
     
+    @Override
     public void destroy() {   
         userService.destroy();     
     }
 
     public UserService getUserService() {
         return userService;
-    }   
+    }
+
+    public Config getConfig() {
+        return config;
+    }
 }
