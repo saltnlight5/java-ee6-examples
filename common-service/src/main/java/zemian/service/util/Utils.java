@@ -26,14 +26,14 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 /**
- * A utility class that provide general programming helpers.
+ * A utility class that provide general programming helpers within the JDK. You should not
+ * add any methods here that depends on third party libraries. Use only the JDK.
  *
  * @author zedeng
  */
 public class Utils {
     
-    // We do not intend to instanciate this class.
-
+    /** We do not intend to instantiate this class. */
     private Utils() {
     }
 
@@ -55,6 +55,19 @@ public class Utils {
             result = System.identityHashCode(object) + "_BAD_TO_STRING";
         }
         return result;
+    }
+
+    public static String toStringExt(Object object) {
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("object: " + toString(object));
+    	Class<?> clz = object.getClass();
+    	sb.append("object identityHashCode: " + System.identityHashCode(object));
+    	sb.append("object class: " + clz);
+    	sb.append("object classLoader: " + clz.getClassLoader());
+    	sb.append("object classLocation: " + clz.getProtectionDomain().getCodeSource().getLocation());
+    	sb.append("object classes: " + list(clz.getClasses()));
+    	sb.append("object typeParameters: " + list(clz.getTypeParameters()));
+    	return sb.toString();
     }
 
     public static String join(String sep, String... texts) {
@@ -206,13 +219,32 @@ public class Utils {
     public static Class<?> javaClass(Class<?> clz) {
         return clz;
     }
-
-    public static void inspect(Object object) {
-        System.out.println("object: " + object);
-        System.out.println("object class: " + object.getClass());
-        System.out.println("object identityHashCode: " + System.identityHashCode(object));
-    }
     
+    /** 
+     * Try to execute $HOME/testBefore.groovy, $HOME/test.groovy, $HOME/testAfter.groovy if they are found.
+     * If files are not found, this method will do nothing.
+     */
+    public static void runTestScript(Object ... bindings) {
+        String path = System.getProperty("user.home");
+    	String mainFileName = path + "/test.groovy";
+    	String preFileName = path + "/testBefore.groovy";
+    	String postFileName = path + "/testAfter.groovy";   	
+        
+        // Excute a pre script file if exits.
+        if (new File(preFileName).exists()) {
+            runScript(preFileName, map(bindings));
+    	}
+        // Run the main script
+        if (new File(mainFileName).exists()) {
+            runScript(mainFileName, map(bindings));
+    	}
+        
+        // Execute a post script file if exits.
+        if (new File(postFileName).exists()) {
+            runScript(postFileName, map(bindings));
+    	}        
+    }
+	
     public static void runScript(String fileName) {
         runScript(fileName, map());
     }
@@ -258,14 +290,6 @@ public class Utils {
         }
     }
 
-    public static void printClassLoader(String msg) {
-        System.out.println(msg);
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        StringBuilder result = new StringBuilder();
-        getClassLoaderTreeInfo(classLoader, result, "  ");
-        System.out.println(result.toString());
-    }
-
     public static void getClassLoaderTreeInfo(ClassLoader classLoader, StringBuilder sb, String indent) {
         sb.append(indent);
         sb.append(String.format("ClassLoader: %s", classLoader));
@@ -275,9 +299,25 @@ public class Utils {
             getClassLoaderTreeInfo(parent, sb, indent + "  ");
         }
     }
+    
+    ////////////////////////////////////////////////
+    // Print and log debugging information to STDOUT
+    ////////////////////////////////////////////////
 
     /** A temporary checkpoint in code to inspect stacktrace by throwing a harmless exception on purpose. */
     public static void printCheckpoint() {
         new Exception("Checkpoint").printStackTrace();
+    }
+
+    public static void printClassLoader(String msg) {
+        System.out.println(msg);
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        StringBuilder result = new StringBuilder();
+        getClassLoaderTreeInfo(classLoader, result, "  ");
+        System.out.println(result.toString());
+    }
+    
+    public static void printObject(Object object) {
+        System.out.println(toStringExt(object));
     }
 }
