@@ -25,8 +25,6 @@ public class UserSamples {
     private static final String NUMS = "0123456789";
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LETTERS_NUMS = LETTERS + NUMS;
-    private static final String[] FIRST_NAMES = {"John", "Chris", "Alyson", "Zemian", "Sam"};
-    private static final String[] LAST_NAMES = {"Smith", "Doe", "Jane", "Johnson", "Cool"};
         
     @Inject
     private UserDao userDao;
@@ -49,9 +47,7 @@ public class UserSamples {
         for (int i = 0; i < numOfUsers; i++) {
             User user = new User();
             user.setUsername(batchId + "_" + baseUsername + "_" + i);
-            user.setFirstName(FIRST_NAMES[i % FIRST_NAMES.length]);
-            user.setLastName(LAST_NAMES[i % LAST_NAMES.length]);
-            user.setEncryptedPassword(UUID.randomUUID().toString());
+            user.setPassword(UUID.randomUUID().toString());
             
             userDao.save(user);
             result.add(user);

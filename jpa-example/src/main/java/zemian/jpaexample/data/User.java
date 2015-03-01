@@ -1,19 +1,19 @@
 package zemian.jpaexample.data;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERACCOUNT")
+@Table(name = "USERS")
 public class User {
 
     @Id
     private String username;
-    private String encryptedPassword;
-    private String firstName;
-    private String lastName;
-
+    private String password;
+    private Date createdOn;
+    
     public String getUsername() {
         return username;
     }
@@ -22,32 +22,16 @@ public class User {
         this.username = username;
     }
 
-    public String getEncryptedPassword() {
-        return encryptedPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "USER(username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ")";
+        return "User(username=" + username + ")";
     }
 }
