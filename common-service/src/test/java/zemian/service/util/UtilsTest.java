@@ -15,8 +15,6 @@ public class UtilsTest {
     
     @Test
     public void demo() {
-        System.out.println("Run test scripts: ");
-        Utils.runTestScript("n", 2);
     }
     
     /** 
@@ -38,13 +36,13 @@ public class UtilsTest {
         
         Utils.printCheckpoint();
         
-        System.out.println("Eval script: " + Utils.evalScript("js", "Math.pow(12, n);", Utils.map("n", 2)));
+        System.out.println("Eval script: " + Utils.evalScript("js", "Math.pow(12, n);", "n", 2));
         
         System.out.println("Run script: ");
-        Utils.runScript("src/main/resources/zemian/service/util/runscript-test.js", Utils.map("n", 2));
+        Utils.runScript("src/main/resources/zemian/service/util/runscript-test.js", "n", 2);
         
         System.out.println("Run test scripts: ");
-        Utils.runTestScript(Utils.map("n", 2));
+        Utils.runTestScript("n", 2);
     }
     
     @Test
