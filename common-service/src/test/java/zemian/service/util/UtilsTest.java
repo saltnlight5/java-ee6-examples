@@ -13,6 +13,12 @@ import org.junit.*;
  */
 public class UtilsTest {
     
+    @Test
+    public void demo() {
+        System.out.println("Run test scripts: ");
+        Utils.runTestScript("n", 2);
+    }
+    
     /** 
      * These are not really asserting test, but to run it manually to do
      * a quick eye inspection of the Utils does work.
@@ -36,6 +42,9 @@ public class UtilsTest {
         
         System.out.println("Run script: ");
         Utils.runScript("src/main/resources/zemian/service/util/runscript-test.js", Utils.map("n", 2));
+        
+        System.out.println("Run test scripts: ");
+        Utils.runTestScript(Utils.map("n", 2));
     }
     
     @Test

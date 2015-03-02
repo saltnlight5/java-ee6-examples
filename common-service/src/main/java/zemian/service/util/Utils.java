@@ -221,14 +221,16 @@ public class Utils {
     }
     
     /** 
-     * Try to execute $HOME/testBefore.groovy, $HOME/test.groovy, $HOME/testAfter.groovy if they are found.
+     * Try to execute [fileName]Before.ext, [fileName].ext, [fileName]After.ext if they are found.
      * If files are not found, this method will do nothing.
      */
-    public static void runTestScript(Object ... bindings) {
-        String path = System.getProperty("user.home");
-    	String mainFileName = path + "/test.groovy";
-    	String preFileName = path + "/testBefore.groovy";
-    	String postFileName = path + "/testAfter.groovy";   	
+    public static void runScriptIfExists(String fileName, Object ... bindings) {
+        String[] words = fileName.split("\\.");
+        String pathBase = words[0], ext = words[1];
+    	String mainFileName = fileName;
+    	String preFileName = pathBase + "Before." + ext;
+    	String postFileName = pathBase + "After." + ext;
+        //System.out.println("DEBUG: preFileName=" + preFileName + ", mainFileName=" + mainFileName + ", postFileName=" + postFileName);
         
         // Excute a pre script file if exits.
         if (new File(preFileName).exists()) {
@@ -244,12 +246,30 @@ public class Utils {
             runScript(postFileName, map(bindings));
     	}        
     }
+    
+    /** 
+     * Try to execute $HOME/testBefore.groovy, $HOME/test.groovy, $HOME/testAfter.groovy if they are found.
+     * If files are not found, this method will do nothing.
+     */
+    public static void runGroovyTestScript(Object ... bindings) {
+        String path = System.getProperty("user.home");
+    	runScriptIfExists(path + "/test.groovy", bindings);
+    }
+    
+    /** 
+     * Try to execute $HOME/testBefore.js, $HOME/test.js, $HOME/testAfter.js if they are found.
+     * If files are not found, this method will do nothing.
+     */
+    public static void runTestScript(Object ... bindings) {
+        String path = System.getProperty("user.home");
+    	runScriptIfExists(path + "/test.js", bindings);
+    }
 	
     public static void runScript(String fileName) {
         runScript(fileName, map());
     }
     
-    public static void runScript(String fileName, Map<String, Object> bindingsMap) {
+    public static void runScript(String fileName, Object ... bindings) {
         String ext = "js"; // Default to JavaScript.
         String[] names = fileName.split("\\.");
         if (names.length >= 2) {
@@ -257,23 +277,25 @@ public class Utils {
         }
         try {
             ScriptEngine se = new ScriptEngineManager().getEngineByExtension(ext);
+            if (se == null)
+                throw new RuntimeException("Script enginge not found for ext type: " + ext);
             try (FileReader reader = new FileReader(fileName)) {
-                Bindings bindings = se.createBindings();
-                bindings.putAll(bindingsMap);
-                se.eval(reader, bindings);
+                Bindings bindingsObj = se.createBindings();
+                bindingsObj.putAll(map(bindings));
+                se.eval(reader, bindingsObj);
             }
         } catch (IOException | ScriptException e) {
             throw new RuntimeException("Failed to run script by engine: " + ext, e);
         }
     }
     
-    public static <T> T evalScript(String engineName, String script, Map<String, Object> bindingsMap) {
+    public static <T> T evalScript(String engineName, String script, Object ... bindings) {
         try {
             ScriptEngine se = new ScriptEngineManager().getEngineByName(engineName);
             try (StringReader reader = new StringReader(script)) {
-                Bindings bindings = se.createBindings();
-                bindings.putAll(bindingsMap);
-                Object result = se.eval(reader, bindings);
+                Bindings bindingsObj = se.createBindings();
+                bindingsObj.putAll(map(bindings));                
+                Object result = se.eval(reader, bindingsObj);
                 return (T)result;
             }
         } catch (ScriptException e) {
