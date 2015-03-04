@@ -32,6 +32,14 @@ import javax.script.ScriptException;
  * @author zedeng
  */
 public class Utils {
+
+    public static List<Object> toList(Object[] elements) {
+        List<Object> result = new ArrayList<>();
+        for (Object e : elements) {
+            result.add(e);
+        }
+        return result;
+    }
     
     /** We do not intend to instantiate this class. */
     private Utils() {

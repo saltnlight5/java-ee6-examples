@@ -41,8 +41,9 @@ public class UtilsTest {
         System.out.println("Run script: ");
         Utils.runScript("src/main/resources/zemian/service/util/runscript-test.js", "n", 2);
         
-        System.out.println("Run test scripts: ");
-        Utils.runTestScript("n", 2);
+        // Disable just in case so we do not run something at random.
+        //System.out.println("Run test scripts: ");
+        //Utils.runTestScript("n", 2);
     }
     
     @Test
