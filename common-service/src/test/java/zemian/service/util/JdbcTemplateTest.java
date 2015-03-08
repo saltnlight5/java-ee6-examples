@@ -53,7 +53,7 @@ public class JdbcTemplateTest {
                 System.out.println("Query row: " + Utils.toList(jdbc.queryRow("select * from testdata where id=1")));
                 System.out.println("Query object: " + jdbc.queryObject("select data from testdata where id=?", 1));
                 
-                jdbc.withPreparedStmt("insert into testdata(id, data) values(?, ?)", new Object[]{}, new JdbcTemplate.PreparedStmtAction() {
+                jdbc.withPreparedStmt("insert into testdata(id, data) values(?, ?)", Utils.emptyArray(), new JdbcTemplate.PreparedStmtAction() {
                     @Override
                     public void doWork(PreparedStatement stmt) throws Exception {    
                         for (int i = 0; i < 1000; i++) {
@@ -62,6 +62,7 @@ public class JdbcTemplateTest {
                             stmt.addBatch();
                             if (i % 25 == 24) {
                                 stmt.executeBatch();
+                                System.out.println("Insert by batch. row=" + i);
                             }
                         }
                         // ensure last batch is executed.

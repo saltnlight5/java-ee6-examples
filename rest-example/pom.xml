@@ -27,7 +27,7 @@
     <dependencies>
         <dependency>
             <groupId>zemian</groupId>
-            <artifactId>jpa-example</artifactId>
+            <artifactId>common-service</artifactId>
         </dependency>
     </dependencies>
     

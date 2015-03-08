@@ -33,6 +33,14 @@ import javax.script.ScriptException;
  */
 public class Utils {
 
+    public static Object[] emptyArray() {
+        return new Object[0];
+    }
+    
+    public static Object[] oneArray() {
+        return new Object[1];
+    }
+    
     public static List<Object> toList(Object[] elements) {
         List<Object> result = new ArrayList<>();
         for (Object e : elements) {

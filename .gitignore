@@ -1,8 +1,8 @@
 ### Eclipse
-#.metadata/
-#.settings/
-#.classpath
-#.project
+.metadata/
+.settings/
+.classpath
+.project
 
 ### NetBeans
 nb-configuration.xml
