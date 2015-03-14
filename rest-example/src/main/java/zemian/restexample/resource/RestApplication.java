@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zemian.restexample.rest;
+package zemian.restexample.resource;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
