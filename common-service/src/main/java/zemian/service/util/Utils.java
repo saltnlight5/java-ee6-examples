@@ -32,22 +32,6 @@ import javax.script.ScriptException;
  * @author zedeng
  */
 public class Utils {
-
-    public static Object[] emptyArray() {
-        return new Object[0];
-    }
-    
-    public static Object[] oneArray() {
-        return new Object[1];
-    }
-    
-    public static List<Object> toList(Object[] elements) {
-        List<Object> result = new ArrayList<>();
-        for (Object e : elements) {
-            result.add(e);
-        }
-        return result;
-    }
     
     /** We do not intend to instantiate this class. */
     private Utils() {
@@ -240,52 +224,55 @@ public class Utils {
      * Try to execute [fileName]Before.ext, [fileName].ext, [fileName]After.ext if they are found.
      * If files are not found, this method will do nothing.
      */
-    public static void runScriptIfExists(String fileName, Object ... bindings) {
+    public static <T> T runScriptIfExists(String fileName, Object ... bindings) {
         String[] words = fileName.split("\\.");
         String pathBase = words[0], ext = words[1];
     	String mainFileName = fileName;
     	String preFileName = pathBase + "Before." + ext;
     	String postFileName = pathBase + "After." + ext;
         //System.out.println("DEBUG: preFileName=" + preFileName + ", mainFileName=" + mainFileName + ", postFileName=" + postFileName);
-        
+
+        Object result = null;
         // Excute a pre script file if exits.
         if (new File(preFileName).exists()) {
-            runScript(preFileName, map(bindings));
+            runScript(preFileName, bindings);
     	}
         // Run the main script
         if (new File(mainFileName).exists()) {
-            runScript(mainFileName, map(bindings));
+        	result = runScript(mainFileName, bindings);
     	}
         
         // Execute a post script file if exits.
         if (new File(postFileName).exists()) {
-            runScript(postFileName, map(bindings));
-    	}        
+            runScript(postFileName, bindings);
+    	}
+        
+        return (T)result;
     }
     
     /** 
      * Try to execute $HOME/testBefore.groovy, $HOME/test.groovy, $HOME/testAfter.groovy if they are found.
      * If files are not found, this method will do nothing.
      */
-    public static void runGroovyTestScript(Object ... bindings) {
+    public static <T> T runGroovyTestScript(Object ... bindings) {
         String path = System.getProperty("user.home");
-    	runScriptIfExists(path + "/test.groovy", bindings);
+    	return runScriptIfExists(path + "/test.groovy", bindings);
     }
     
     /** 
      * Try to execute $HOME/testBefore.js, $HOME/test.js, $HOME/testAfter.js if they are found.
      * If files are not found, this method will do nothing.
      */
-    public static void runTestScript(Object ... bindings) {
+    public static <T> T runTestScript(Object ... bindings) {
         String path = System.getProperty("user.home");
-    	runScriptIfExists(path + "/test.js", bindings);
+    	return runScriptIfExists(path + "/test.js", bindings);
     }
 	
-    public static void runScript(String fileName) {
-        runScript(fileName, map());
+    public static <T> T runScript(String fileName) {
+        return runScript(fileName);
     }
     
-    public static void runScript(String fileName, Object ... bindings) {
+    public static <T> T runScript(String fileName, Object ... bindings) {
         String ext = "js"; // Default to JavaScript.
         String[] names = fileName.split("\\.");
         if (names.length >= 2) {
@@ -298,7 +285,7 @@ public class Utils {
             try (FileReader reader = new FileReader(fileName)) {
                 Bindings bindingsObj = se.createBindings();
                 bindingsObj.putAll(map(bindings));
-                se.eval(reader, bindingsObj);
+                return (T)se.eval(reader, bindingsObj);
             }
         } catch (IOException | ScriptException e) {
             throw new RuntimeException("Failed to run script by engine: " + ext, e);
