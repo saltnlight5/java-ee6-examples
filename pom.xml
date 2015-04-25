@@ -11,7 +11,6 @@
     <modules>
         <module>servlet3-cdi-example</module>
         <module>jsp-example</module>
-        <module>mvc-example</module>
         <module>jsf-example</module>
         <module>cdi-example</module>
         <module>jpa-example</module>
