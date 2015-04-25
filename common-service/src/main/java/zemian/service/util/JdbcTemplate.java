@@ -38,7 +38,7 @@ public class JdbcTemplate {
         }
     }
 
-    public Connection getConnnection() {
+    public Connection getConnection() {
         return conn;
     }
 
