@@ -9,10 +9,12 @@
     <version>1.0-SNAPSHOT</version>
 	
     <modules>
+        <module>common-service</module>
+        <module>cdi-example</module>
+        <module>servlet3-example</module>
         <module>servlet3-cdi-example</module>
         <module>jsp-example</module>
         <module>jsf-example</module>
-        <module>cdi-example</module>
         <module>jpa-example</module>
         <module>rest-example</module>
     </modules>
@@ -59,7 +61,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.11</version>
+                <version>4.12</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -101,21 +103,12 @@
     
     <profiles>
         <profile>
-            <id>server-common-lib</id>
-            <dependencies>                
-                <!--
-                MySQL database.
-                -->
+            <id>extra</id>
+            <dependencies>
                 <dependency>
                     <groupId>mysql</groupId>
                     <artifactId>mysql-connector-java</artifactId>
                 </dependency>
-            </dependencies>
-        </profile>
-                
-        <profile>
-            <id>server-extra-lib</id>
-            <dependencies>
                 <dependency>
                     <groupId>org.codehaus.groovy</groupId>
                     <artifactId>groovy-all</artifactId>

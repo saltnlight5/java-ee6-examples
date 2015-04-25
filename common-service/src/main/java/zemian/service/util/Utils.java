@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
+
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -345,4 +346,15 @@ public class Utils {
     public static void printObject(Object object) {
         System.out.println(toStringExt(object));
     }
+
+	public static <T> List<T> toList(T[] array) {
+		List<T> result = new ArrayList<>();
+		for (T e : array) 
+			result.add(e);
+		return result;
+	}
+
+	public static Object[] emptyArray() {
+		return new Object[]{};
+	}
 }
