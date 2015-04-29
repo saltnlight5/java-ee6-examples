@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="sakila" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>jdbc/sakila</jta-data-source>
+    <class>zemian.sakila.Payment</class>
+    <class>zemian.sakila.Staff</class>
+    <class>zemian.sakila.FilmList</class>
+    <class>zemian.sakila.FilmCategory</class>
+    <class>zemian.sakila.Store</class>
+    <class>zemian.sakila.SalesByStore</class>
+    <class>zemian.sakila.Film</class>
+    <class>zemian.sakila.Rental</class>
+    <class>zemian.sakila.City</class>
+    <class>zemian.sakila.Language</class>
+    <class>zemian.sakila.Inventory</class>
+    <class>zemian.sakila.NicerButSlowerFilmList</class>
+    <class>zemian.sakila.ActorInfo</class>
+    <class>zemian.sakila.Actor</class>
+    <class>zemian.sakila.FilmText</class>
+    <class>zemian.sakila.Address</class>
+    <class>zemian.sakila.StaffList</class>
+    <class>zemian.sakila.SalesByFilmCategory</class>
+    <class>zemian.sakila.Category</class>
+    <class>zemian.sakila.FilmActor</class>
+    <class>zemian.sakila.Customer</class>
+    <class>zemian.sakila.Country</class>
+    <class>zemian.sakila.CustomerList</class>
+    <properties>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="zemian_jpa-sakila_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="sakila123"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="sakila"/>
+    </properties>
+  </persistence-unit>
+</persistence>
