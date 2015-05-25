@@ -10,5 +10,9 @@ nbbuild.xml
 nbdist/
 nbproject/
 
+### IntelliJ
+.idea/
+*.iml
+
 ### Maven
 target/
