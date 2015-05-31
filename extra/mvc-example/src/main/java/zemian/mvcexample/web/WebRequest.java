@@ -1,7 +1,7 @@
 /*
  *  Zemian Deng 2014
  */
-package zemian.mvcexample.web.controller;
+package zemian.mvcexample.web;
 
 import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class WebRequest {
     private HttpServletRequest httpServletRequest;
-    private Servlet mainServlet;
+    private String controllerName;
 
-    public void setMainServlet(Servlet mainServlet) {
-        this.mainServlet = mainServlet;
+    public String getControllerName() {
+        return controllerName;
     }
 
-    public Servlet getMainServlet() {
-        return mainServlet;
+    public void setControllerName(String controllerName) {
+        this.controllerName = controllerName;
     }
-    
+
     public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
         this.httpServletRequest = httpServletRequest;
     }

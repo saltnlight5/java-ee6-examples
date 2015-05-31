@@ -4,8 +4,11 @@
 
 package zemian.mvcexample.web.controller;
 
+import zemian.mvcexample.web.Controller;
+import zemian.mvcexample.web.MView;
+import zemian.mvcexample.web.WebRequest;
+
 import java.util.Date;
-import zemian.service.util.Utils;
 
 /**
  * Just a test controller that return "message" and "serverTime" as model map. 
@@ -16,8 +19,11 @@ import zemian.service.util.Utils;
 public class HelloController implements Controller {
 
     @Override
-    public Object handle(WebRequest request) {
-        return Utils.map("message", "Hello World.", "serverTime", new Date());
+    public MView handle(WebRequest wreq) {
+        MView mview = new MView(wreq.getControllerName());
+        mview.put("message", "Hello World.");
+        mview.put("serverTime", new Date());
+        return mview;
     }
 
 }

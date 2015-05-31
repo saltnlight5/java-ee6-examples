@@ -1,9 +1,9 @@
 = glassfish-logging-example
 
-This is just an empty web application that will explore and test how we
+This is a web application that will explore and test how we
 can use SLF4J logging facade in GlassFish server. Due to glassfish server
 implementation also embedded SLF4J, we need to specially setup the server
-to handle per application loggin guse SLF4J. See instruction below.
+to handle per application logging to use specific SLF4J. See instruction below.
 
 The web application provide has a context listener that will log a message
 by SLF4J when it starts up. This is how we can verify that logging is working.
@@ -21,7 +21,7 @@ the JDK logging by package name.
 
 Now inspect your log file at $GF/domains/domain1/logs/server.log
 
-= Gettin started with Glassfish server
+= Getting started with Glassfish server
 
 == Start server
 
@@ -57,17 +57,19 @@ You may download jars from their project site, or you may use the Maven and fetc
 the custom profiles defined in this project pom.xml like this:
 
 	1. cd glassfish-logging-example
-	2. mvn dependency:copy-dependencies -P server-common-lib
+	2. mvn dependency:copy-dependencies
 
 Now you will find the jars in target/dependency folder.	Just copy what you need.
 
 == How to setup SLF4J
 
-1. Copy slf4j-api-1.7.7 and slf4j-jdk-1.7.7 jars into $GF/lib/endorsed
-2. Edit $GF/domains/domain1/config/logging.properties and add your own logging package level
+1. Copy slf4j-api-1.7.7.jar, jul-to-slf4j-1.7.7.jar and slf4j-jdk14-1.7.7.jar files into $GF/lib/endorsed
+2. Edit $GF/domains/domain1/config/logging.properties and add your own logging package level. For example:
 	zemian.level=FINEST
 	
-	* NOTE: The "zemian" is the package name I used in this glassfish-logging-example application.
+* NOTE: The "zemian" is the package name I used in this glassfish-logging-example application.
+
+= GlasshFish Extra
 
 == How to enable JSTL tag for all web applications
 
