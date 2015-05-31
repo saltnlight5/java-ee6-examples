@@ -63,7 +63,7 @@ Now you will find the jars in target/dependency folder.	Just copy what you need.
 
 == How to setup SLF4J
 
-1. Copy slf4j-api-1.7.7.jar, jul-to-slf4j-1.7.7.jar and slf4j-jdk14-1.7.7.jar files into $GF/lib/endorsed
+1. Copy slf4j-api-1.7.7.jar and slf4j-jdk14-1.7.7.jar files into $GF/lib/endorsed
 2. Edit $GF/domains/domain1/config/logging.properties and add your own logging package level. For example:
 	zemian.level=FINEST
 	
